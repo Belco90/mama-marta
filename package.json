@@ -7,7 +7,7 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"format": "prettier . --write --ignore-path .gitignore --ignore-unknown",
+		"format": "prettier . --write --ignore-unknown",
 		"gen:theme-typings": "chakra-cli tokens src/custom-theme.ts --strict-component-types",
 		"prepare": "is-ci || husky install",
 		"postinstall": "pnpm gen:theme-typings"
