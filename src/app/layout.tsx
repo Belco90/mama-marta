@@ -1,23 +1,23 @@
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: "Mama Marta",
-  description: "Para Marta: la mejor mami 🧡",
-  robots: {
-    index: false,
-  },
-};
+	title: 'Mama Marta',
+	description: 'Para Marta: la mejor mami 🧡',
+	robots: {
+		index: false,
+	},
+}
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode
 }) {
-  return (
-    <html lang="es">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+	return (
+		<html lang="es">
+			<body className={inter.className}>{children}</body>
+		</html>
+	)
 }

@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import { Heading } from "@chakra-ui/react";
+import { Heading } from '@chakra-ui/react'
 
 interface TestProps {}
 
 const Test = (props: TestProps) => {
-  return <Heading fontSize="2xl">Chakra component</Heading>;
-};
+	return <Heading fontSize="2xl">Chakra component</Heading>
+}
 
-export default Test;
+export default Test

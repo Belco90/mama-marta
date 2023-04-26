@@ -1,38 +1,38 @@
 {
-  "name": "mama-marta",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier . --write --ignore-path .gitignore --ignore-unknown",
-    "gen:theme-typings": "chakra-cli tokens src/custom-theme.ts --strict-component-types",
-    "postinstall": "pnpm gen:theme-typings"
-  },
-  "engines": {
-    "pnpm": "^8.1.0"
-  },
-  "packageManager": "pnpm@8.3.1",
-  "dependencies": {
-    "@chakra-ui/cli": "^2.4.0",
-    "@chakra-ui/react": "^2.6.0",
-    "@chakra-ui/styled-system": "^2.9.0",
-    "@chakra-ui/theme-tools": "^2.0.16",
-    "@chakra-ui/utils": "^2.0.14",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
-    "@types/node": "18.16.0",
-    "@types/react": "18.0.38",
-    "@types/react-dom": "18.0.11",
-    "eslint": "8.39.0",
-    "eslint-config-next": "13.3.1",
-    "framer-motion": "^10.12.4",
-    "next": "13.3.1",
-    "prettier": "^2.8.8",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.4"
-  }
+	"name": "mama-marta",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "prettier . --write --ignore-path .gitignore --ignore-unknown",
+		"gen:theme-typings": "chakra-cli tokens src/custom-theme.ts --strict-component-types",
+		"postinstall": "pnpm gen:theme-typings"
+	},
+	"engines": {
+		"pnpm": "^8.1.0"
+	},
+	"packageManager": "pnpm@8.3.1",
+	"dependencies": {
+		"@chakra-ui/cli": "^2.4.0",
+		"@chakra-ui/react": "^2.6.0",
+		"@chakra-ui/styled-system": "^2.9.0",
+		"@chakra-ui/theme-tools": "^2.0.16",
+		"@chakra-ui/utils": "^2.0.14",
+		"@emotion/react": "^11.10.6",
+		"@emotion/styled": "^11.10.6",
+		"@types/node": "18.16.0",
+		"@types/react": "18.0.38",
+		"@types/react-dom": "18.0.11",
+		"eslint": "8.39.0",
+		"eslint-config-next": "13.3.1",
+		"framer-motion": "^10.12.4",
+		"next": "13.3.1",
+		"prettier": "^2.8.8",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"typescript": "5.0.4"
+	}
 }
