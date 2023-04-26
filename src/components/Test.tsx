@@ -2,9 +2,7 @@
 
 import { Heading } from '@chakra-ui/react'
 
-interface TestProps {}
-
-const Test = (props: TestProps) => {
+const Test = () => {
 	return <Heading fontSize="2xl">Chakra component</Heading>
 }
 
