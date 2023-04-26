@@ -1,6 +1,16 @@
-import { Inter } from 'next/font/google'
+import { Inter, Roboto_Mono } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+import Providers from '~/app/providers'
+
+const inter = Inter({
+	subsets: ['latin'],
+	variable: '--font-inter',
+})
+
+const robotoMono = Roboto_Mono({
+	subsets: ['latin'],
+	variable: '--font-roboto-mono',
+})
 
 export const metadata = {
 	title: 'Mama Marta',
@@ -16,8 +26,10 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang="es">
-			<body className={inter.className}>{children}</body>
+		<html lang="es" className={`${inter.variable} ${robotoMono.variable}`}>
+			<body>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	)
 }
