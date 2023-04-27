@@ -1,4 +1,5 @@
 import { Inter, Roboto_Mono } from 'next/font/google'
+import { type ReactNode } from 'react'
 
 import Providers from '~/app/providers'
 
@@ -20,11 +21,7 @@ export const metadata = {
 	},
 }
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="es" className={`${inter.variable} ${robotoMono.variable}`}>
 			<body>
