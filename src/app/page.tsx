@@ -1,9 +1,11 @@
-import Test from '~/components/Test'
+import HomePageView from '~/app/view'
 
-export default function Home() {
+function Home() {
 	return (
 		<main>
-			<Test />
+			<HomePageView />
 		</main>
 	)
 }
+
+export default Home

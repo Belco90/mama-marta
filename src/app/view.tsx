@@ -2,7 +2,7 @@
 
 import { Button, Heading } from '@chakra-ui/react'
 
-const Test = () => {
+const HomePageView = () => {
 	return (
 		<>
 			<Heading fontSize="2xl">Chakra component</Heading>
@@ -12,4 +12,4 @@ const Test = () => {
 	)
 }
 
-export default Test
+export default HomePageView
