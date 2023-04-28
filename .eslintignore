@@ -3,3 +3,4 @@ node_modules
 .next
 .env*
 lint-staged.config.js
+/src/lib/database.types.ts
