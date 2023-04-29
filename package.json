@@ -8,6 +8,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"format": "prettier . --write --ignore-unknown",
+		"type-check": "tsc --noEmit",
 		"gen:theme-typings": "chakra-cli tokens src/custom-theme.ts --strict-component-types",
 		"prepare": "is-ci || husky install",
 		"postinstall": "pnpm gen:theme-typings"
