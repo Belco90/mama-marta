@@ -1,14 +1,19 @@
 'use client'
 
-import { Button, Heading } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import { type FC } from 'react'
 
-const HomePageView = () => {
+import { type Post } from '~/lib/supabase-client'
+
+interface HomePageViewProps {
+	posts: Array<Post>
+}
+
+const HomePageView: FC<HomePageViewProps> = ({ posts }) => {
 	return (
-		<>
-			<Heading fontSize="2xl">Chakra component</Heading>
-			<hr />
-			<Button>Hey!</Button>
-		</>
+		<Box width="full">
+			<pre>{JSON.stringify(posts, null, 2)}</pre>
+		</Box>
 	)
 }
 
