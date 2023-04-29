@@ -1,15 +1,15 @@
 import HomePageView from '~/app/view'
-import { retrieveAllPosts } from '~/lib/supabase-client'
+import { retrieveAllPosts } from '~/lib/supabase-queries'
 
 // do not cache this page
 export const revalidate = 0
 
 async function HomePage() {
-	const { data: posts } = await retrieveAllPosts()
+	const { data } = await retrieveAllPosts()
 
 	return (
 		<main>
-			<HomePageView posts={posts ?? []} />
+			<HomePageView posts={data ?? []} />
 		</main>
 	)
 }

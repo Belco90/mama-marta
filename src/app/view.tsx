@@ -3,7 +3,7 @@
 import { Box } from '@chakra-ui/react'
 import { type FC } from 'react'
 
-import { type Post } from '~/lib/supabase-client'
+import { type Post } from '~/lib/supabase-queries'
 
 interface HomePageViewProps {
 	posts: Array<Post>
