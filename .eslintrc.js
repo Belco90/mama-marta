@@ -82,6 +82,16 @@ module.exports = {
 					},
 				],
 
+				'@typescript-eslint/no-misused-promises': [
+					'error',
+					{
+						checksVoidReturn: {
+							arguments: false,
+							attributes: false,
+						},
+					},
+				],
+
 				// Disabling because of index errors on interfaces,
 				// which works fine in type aliases:
 				// https://bobbyhadz.com/blog/typescript-index-signature-for-type-is-missing-in-type
