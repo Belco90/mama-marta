@@ -14,7 +14,10 @@ const robotoMono = Roboto_Mono({
 })
 
 export const metadata = {
-	title: 'Mama Marta',
+	title: {
+		template: '%s | Mama Marta',
+		default: 'Mama Marta',
+	},
 	description: 'Para Marta: la mejor mami 🧡',
 	robots: {
 		index: false,
