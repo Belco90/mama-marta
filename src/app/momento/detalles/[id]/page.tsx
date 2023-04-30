@@ -9,7 +9,7 @@ interface PostDetailsPageProps {
 const PostDetailsPage = async ({ params }: PostDetailsPageProps) => {
 	const { id } = params
 	const { data } = await supabase.from('post').select('*').eq('id', id).limit(1)
-	if (!data) {
+	if (!data || data.length === 0) {
 		throw new Error(`Post with id "${id}" not found`)
 	}
 	const post = data[0]
