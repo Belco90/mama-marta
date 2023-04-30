@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js'
 import { type Database } from '~/lib/database.types'
 
 const supabase = createClient<Database>(
-	process.env.SUPABASE_URL ?? 'unknown',
-	process.env.SUPABASE_KEY ?? 'unknown'
+	process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'unknown',
+	process.env.NEXT_PUBLIC_SUPABASE_KEY ?? 'unknown'
 )
 
 export { supabase }

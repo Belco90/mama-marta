@@ -21,6 +21,8 @@ export const metadata = {
 	},
 }
 
+export const revalidate = 0
+
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="es" className={`${inter.variable} ${robotoMono.variable}`}>

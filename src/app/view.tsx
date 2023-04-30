@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from '@chakra-ui/next-js'
 import {
 	Card,
 	CardHeader,
@@ -16,9 +17,10 @@ interface HomePageViewProps {
 	posts: Array<Post>
 }
 
-const HomePageView: FC<HomePageViewProps> = ({ posts }) => {
+const HomeView: FC<HomePageViewProps> = ({ posts }) => {
 	return (
 		<VStack width="full">
+			<Link href="nuevo-momento">Crear momento</Link>
 			{posts.map((post) => (
 				<Card key={post.id}>
 					<CardHeader>
@@ -39,4 +41,4 @@ const HomePageView: FC<HomePageViewProps> = ({ posts }) => {
 	)
 }
 
-export default HomePageView
+export default HomeView

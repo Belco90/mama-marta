@@ -37,7 +37,6 @@ module.exports = {
 				},
 			},
 		],
-		'import/group-exports': 'error',
 		'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
 
 		// Unicorn
