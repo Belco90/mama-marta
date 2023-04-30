@@ -25,7 +25,9 @@ const HomeView: FC<HomePageViewProps> = ({ posts }) => {
 			{posts.map((post) => (
 				<Card key={post.id}>
 					<CardHeader>
-						<Text fontWeight="bold">{post.title}</Text>
+						<Text fontWeight="bold">
+							<Link href={`momento/detalles/${post.id}`}>{post.title}</Link>
+						</Text>
 					</CardHeader>
 					<CardBody>
 						<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
