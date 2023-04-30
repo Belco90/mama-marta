@@ -10,6 +10,7 @@ import {
 	Textarea,
 	VStack,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
 import { type FormEvent } from 'react'
 import { v4 as uuid } from 'uuid'
 
@@ -17,7 +18,6 @@ import { supabase } from '~/lib/supabase-client'
 
 const uploadPicture = async (file: File) => {
 	const fileExt = file.name.split('.').at(-1) ?? 'jpg'
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	const fileName = uuid()
 	const filePath = `${fileName}.${fileExt}`
 
@@ -33,6 +33,7 @@ const uploadPicture = async (file: File) => {
 }
 
 const NewPostView = () => {
+	const router = useRouter()
 	const handleSubmitPost = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
@@ -49,6 +50,8 @@ const NewPostView = () => {
 		const filePath = await uploadPicture(picture)
 
 		await supabase.from('post').insert({ ...postData, pictureName: filePath })
+
+		router.push('/')
 	}
 
 	return (
