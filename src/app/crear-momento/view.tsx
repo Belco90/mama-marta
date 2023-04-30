@@ -60,7 +60,6 @@ const NewPostView = () => {
 	}
 
 	return (
-		// eslint-disable-next-line @typescript-eslint/no-misused-promises
 		<form onSubmit={handleSubmitPost}>
 			<Container>
 				<VStack gap={4} alignItems="start">
