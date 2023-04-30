@@ -12,6 +12,7 @@ import {
 import { type FC } from 'react'
 
 import { type Post } from '~/lib/supabase-queries'
+import { getStoragePublicUrl } from '~/lib/utils'
 
 interface HomePageViewProps {
 	posts: Array<Post>
@@ -29,7 +30,7 @@ const HomeView: FC<HomePageViewProps> = ({ posts }) => {
 					<CardBody>
 						<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
 						<Image
-							src={`https://eeogsfrlhsijofrfgiwk.supabase.co/storage/v1/object/public/picture/${post.pictureName}`}
+							src={getStoragePublicUrl(post.pictureName)}
 							alt={post.title}
 							boxSize="150px"
 							objectFit="cover"
