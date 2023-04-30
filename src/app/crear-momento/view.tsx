@@ -8,6 +8,7 @@ import {
 	Heading,
 	Input,
 	Textarea,
+	useToast,
 	VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
@@ -34,12 +35,11 @@ const uploadPicture = async (file: File) => {
 
 const NewPostView = () => {
 	const router = useRouter()
+	const toast = useToast()
 	const handleSubmitPost = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
-		const formData = new FormData(event.target)
+		const formData = new FormData(event.currentTarget)
 		const { picture, ...postData } = Object.fromEntries(formData) as {
 			title: string
 			description?: string
@@ -51,6 +51,11 @@ const NewPostView = () => {
 
 		await supabase.from('post').insert({ ...postData, pictureName: filePath })
 
+		toast({
+			title: 'Nuevo momento creado correctamente',
+			status: 'success',
+			isClosable: true,
+		})
 		router.push('/')
 	}
 
@@ -62,13 +67,13 @@ const NewPostView = () => {
 					<Heading>Crea un nuevo momento</Heading>
 
 					<FormControl isRequired>
-						<FormLabel>Título</FormLabel>
-						<Input name="title" />
+						<FormLabel>Foto</FormLabel>
+						<Input name="picture" type="file" accept="image/*" />
 					</FormControl>
 
-					<FormControl>
-						<FormLabel>Descripción</FormLabel>
-						<Textarea name="description" />
+					<FormControl isRequired>
+						<FormLabel>Título</FormLabel>
+						<Input name="title" />
 					</FormControl>
 
 					<FormControl isRequired>
@@ -76,11 +81,10 @@ const NewPostView = () => {
 						<Input name="happenedAt" type="date" />
 					</FormControl>
 
-					<FormControl isRequired>
-						<FormLabel>Foto</FormLabel>
-						<Input name="picture" type="file" accept="image/*" />
+					<FormControl>
+						<FormLabel>Descripción</FormLabel>
+						<Textarea name="description" />
 					</FormControl>
-
 					<Button type="submit">Crear</Button>
 				</VStack>
 			</Container>

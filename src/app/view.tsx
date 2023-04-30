@@ -20,7 +20,7 @@ interface HomePageViewProps {
 const HomeView: FC<HomePageViewProps> = ({ posts }) => {
 	return (
 		<VStack width="full">
-			<Link href="nuevo-momento">Crear momento</Link>
+			<Link href="crear-momento">Crear momento</Link>
 			{posts.map((post) => (
 				<Card key={post.id}>
 					<CardHeader>
