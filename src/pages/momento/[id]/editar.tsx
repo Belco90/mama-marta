@@ -18,30 +18,18 @@ import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
 import useSWR from 'swr'
 
-import { supabase } from '~/lib/supabase-client'
+import { retrievePost, updatePost } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
-
-// TODO: move to api routes
-const fetcher = async ([, id]: [string, string]) => {
-	const { data, error } = await supabase
-		.from('post')
-		.select('*')
-		.eq('id', id)
-		.single()
-
-	if (error) {
-		throw new Error(error.message)
-	}
-
-	return data
-}
 
 const PostDeletePage = () => {
 	const router = useRouter()
-	const { id } = router.query
+	const { id } = router.query as { id: string }
 	const toast = useToast()
 
-	const { data: post, isLoading } = useSWR(['post', id], fetcher)
+	const { data: post, isLoading } = useSWR(
+		['post', id],
+		([, postId]: Array<string>) => retrievePost(postId)
+	)
 
 	const handleEditPost = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
@@ -49,11 +37,13 @@ const PostDeletePage = () => {
 		const formData = new FormData(event.currentTarget)
 		const postData = Object.fromEntries(formData) as {
 			title: string
-			description?: string
+			description: string | null
 			happenedAt: string
 		}
+		postData.description ||= null
 
-		await supabase.from('post').update(postData).eq('id', id)
+		// TODO: use SWR mutation
+		await updatePost(id, postData)
 
 		toast({
 			title: 'Momento actualizado correctamente',
@@ -61,10 +51,6 @@ const PostDeletePage = () => {
 			isClosable: true,
 		})
 		void router.push('/')
-	}
-
-	if (typeof id !== 'string') {
-		return <Box>No id received</Box>
 	}
 
 	if (isLoading) {

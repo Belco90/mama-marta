@@ -18,27 +18,12 @@ import { HiTrash } from 'react-icons/hi'
 import useSWR from 'swr'
 
 import DeletePostAlertDialog from '~/components/DeletePostAlertDialog'
-import { supabase } from '~/lib/supabase-client'
+import { deletePost, retrievePost } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
-
-// TODO: move to api routes
-const fetcher = async ([, id]: [string, string]) => {
-	const { data, error } = await supabase
-		.from('post')
-		.select('*')
-		.eq('id', id)
-		.single()
-
-	if (error) {
-		throw new Error(error.message)
-	}
-
-	return data
-}
 
 const PostDetailsPage = () => {
 	const router = useRouter()
-	const { id } = router.query
+	const { id } = router.query as { id: string }
 	const toast = useToast()
 	const {
 		isOpen: isDeleteModalOpen,
@@ -47,12 +32,8 @@ const PostDetailsPage = () => {
 	} = useDisclosure()
 
 	const handleDeletePost = async () => {
-		// TODO: move to api routes
-		const { error } = await supabase.from('post').delete().eq('id', id)
-
-		if (error) {
-			throw new Error(String(error))
-		}
+		// TODO: use SWR mutation
+		await deletePost(id)
 
 		toast({
 			title: 'Momento borrado correctamente',
@@ -62,11 +43,10 @@ const PostDetailsPage = () => {
 		onDeleteModalClose()
 		void router.push('/')
 	}
-	const { data: post, isLoading } = useSWR(['post', id], fetcher)
-
-	if (typeof id !== 'string') {
-		return <Box>No id received</Box>
-	}
+	const { data: post, isLoading } = useSWR(
+		['post', id],
+		([, postId]: Array<string>) => retrievePost(postId)
+	)
 
 	if (isLoading) {
 		return <Box>LOADING...</Box>

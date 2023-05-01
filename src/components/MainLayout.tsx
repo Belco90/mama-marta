@@ -6,7 +6,6 @@ interface MainLayoutProps {
 }
 
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {
-	// TODO: load fonts here
 	return (
 		<Flex height="full" direction="column">
 			{/* TODO: NavBar */}

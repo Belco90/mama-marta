@@ -12,26 +12,8 @@ import {
 import { useRouter } from 'next/navigation'
 import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
-import { v4 as uuid } from 'uuid'
 
-import { supabase } from '~/lib/supabase-client'
-
-// TODO: move to api routes
-const uploadPicture = async (file: File) => {
-	const fileExt = file.name.split('.').at(-1) ?? 'jpg'
-	const fileName = uuid()
-	const filePath = `${fileName}.${fileExt}`
-
-	const { error } = await supabase.storage
-		.from('picture')
-		.upload(filePath, file)
-
-	if (error) {
-		throw error
-	}
-
-	return filePath
-}
+import { createPost } from '~/lib/supabase-queries'
 
 const NewPostPage = () => {
 	const router = useRouter()
@@ -40,16 +22,16 @@ const NewPostPage = () => {
 		event.preventDefault()
 
 		const formData = new FormData(event.currentTarget)
-		const { picture, ...postData } = Object.fromEntries(formData) as {
+		const postData = Object.fromEntries(formData) as {
 			title: string
-			description?: string
+			description: string | null
 			happenedAt: string
 			picture: File
 		}
+		postData.description ||= null
 
-		const filePath = await uploadPicture(picture)
-
-		await supabase.from('post').insert({ ...postData, pictureName: filePath })
+		// TODO: use SWR mutation
+		await createPost(postData)
 
 		toast({
 			title: 'Nuevo momento creado correctamente',
