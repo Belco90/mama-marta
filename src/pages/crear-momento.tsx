@@ -1,5 +1,3 @@
-'use client'
-
 import {
 	Button,
 	Container,
@@ -12,11 +10,13 @@ import {
 	VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
+import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import { supabase } from '~/lib/supabase-client'
 
+// TODO: move to api routes
 const uploadPicture = async (file: File) => {
 	const fileExt = file.name.split('.').at(-1) ?? 'jpg'
 	const fileName = uuid()
@@ -33,7 +33,7 @@ const uploadPicture = async (file: File) => {
 	return filePath
 }
 
-const NewPostView = () => {
+const NewPostPage = () => {
 	const router = useRouter()
 	const toast = useToast()
 	const handleSubmitPost = async (event: FormEvent<HTMLFormElement>) => {
@@ -60,35 +60,38 @@ const NewPostView = () => {
 	}
 
 	return (
-		<form onSubmit={handleSubmitPost}>
-			<Container>
-				<VStack gap={4} alignItems="start">
-					<Heading>Crea un nuevo momento</Heading>
+		<>
+			<NextSeo title="Crear momento" />
+			<form onSubmit={handleSubmitPost}>
+				<Container>
+					<VStack gap={4} alignItems="start">
+						<Heading>Crea un nuevo momento</Heading>
 
-					<FormControl isRequired>
-						<FormLabel>Foto</FormLabel>
-						<Input name="picture" type="file" accept="image/*" />
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Foto</FormLabel>
+							<Input name="picture" type="file" accept="image/*" />
+						</FormControl>
 
-					<FormControl isRequired>
-						<FormLabel>Título</FormLabel>
-						<Input name="title" />
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Título</FormLabel>
+							<Input name="title" />
+						</FormControl>
 
-					<FormControl isRequired>
-						<FormLabel>Fecha</FormLabel>
-						<Input name="happenedAt" type="date" />
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Fecha</FormLabel>
+							<Input name="happenedAt" type="date" />
+						</FormControl>
 
-					<FormControl>
-						<FormLabel>Descripción</FormLabel>
-						<Textarea name="description" />
-					</FormControl>
-					<Button type="submit">Crear</Button>
-				</VStack>
-			</Container>
-		</form>
+						<FormControl>
+							<FormLabel>Descripción</FormLabel>
+							<Textarea name="description" />
+						</FormControl>
+						<Button type="submit">Crear</Button>
+					</VStack>
+				</Container>
+			</form>
+		</>
 	)
 }
 
-export default NewPostView
+export default NewPostPage

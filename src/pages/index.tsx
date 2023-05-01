@@ -1,32 +1,37 @@
-'use client'
-
-import { Link } from '@chakra-ui/next-js'
 import {
+	Box,
 	Card,
-	CardHeader,
 	CardBody,
+	CardHeader,
+	Image,
 	Text,
 	VStack,
-	Image,
 } from '@chakra-ui/react'
-import { type FC } from 'react'
+import Link from 'next/link'
+import useSWR from 'swr'
 
-import { type Post } from '~/lib/supabase-queries'
+import { retrieveAllPosts } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
 
-interface HomePageViewProps {
-	posts: Array<Post>
-}
+const HomePage = () => {
+	const { data: posts, isLoading } = useSWR('all-posts', retrieveAllPosts)
 
-const HomeView: FC<HomePageViewProps> = ({ posts }) => {
+	if (isLoading) {
+		return <Box>LOADING...</Box>
+	}
+
+	if (!posts || posts.length === 0) {
+		return <Box>EMPTY</Box>
+	}
+
 	return (
 		<VStack width="full">
-			<Link href="crear-momento">Crear momento</Link>
+			<Link href="/crear-momento">Crear momento</Link>
 			{posts.map((post) => (
 				<Card key={post.id}>
 					<CardHeader>
 						<Text fontWeight="bold">
-							<Link href={`momento/detalles/${post.id}`}>{post.title}</Link>
+							<Link href={`/momento/${post.id}`}>{post.title}</Link>
 						</Text>
 					</CardHeader>
 					<CardBody>
@@ -44,4 +49,4 @@ const HomeView: FC<HomePageViewProps> = ({ posts }) => {
 	)
 }
 
-export default HomeView
+export default HomePage

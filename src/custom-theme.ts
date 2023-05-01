@@ -49,9 +49,9 @@ const accentColor: ColorHues = {
 }
 
 const themeExtensions = {
-	styles: { global: { 'html, body': { height: '100%' } } },
+	styles: { global: { 'html, body, #__next': { height: '100%' } } },
 	config: {
-		initialColorMode: 'dark',
+		initialColorMode: 'light',
 		useSystemColorMode: false,
 	},
 	colors: {

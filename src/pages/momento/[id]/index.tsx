@@ -1,7 +1,5 @@
-'use client'
-
-import { Link } from '@chakra-ui/next-js'
 import {
+	Box,
 	Card,
 	CardBody,
 	CardFooter,
@@ -13,21 +11,34 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 import { HiTrash } from 'react-icons/hi'
+import useSWR from 'swr'
 
-import DeletePostAlertDialog from './DeletePostAlertDialog'
-
+import DeletePostAlertDialog from '~/components/DeletePostAlertDialog'
 import { supabase } from '~/lib/supabase-client'
-import { type Post } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
 
-interface PostDetailsPageViewProps {
-	post: Post
+// TODO: move to api routes
+const fetcher = async ([, id]: [string, string]) => {
+	const { data, error } = await supabase
+		.from('post')
+		.select('*')
+		.eq('id', id)
+		.single()
+
+	if (error) {
+		throw new Error(error.message)
+	}
+
+	return data
 }
 
-const PostDetailsPageView = ({ post }: PostDetailsPageViewProps) => {
+const PostDetailsPage = () => {
 	const router = useRouter()
+	const { id } = router.query
 	const toast = useToast()
 	const {
 		isOpen: isDeleteModalOpen,
@@ -36,7 +47,8 @@ const PostDetailsPageView = ({ post }: PostDetailsPageViewProps) => {
 	} = useDisclosure()
 
 	const handleDeletePost = async () => {
-		const { error } = await supabase.from('post').delete().eq('id', post.id)
+		// TODO: move to api routes
+		const { error } = await supabase.from('post').delete().eq('id', id)
 
 		if (error) {
 			throw new Error(String(error))
@@ -48,11 +60,25 @@ const PostDetailsPageView = ({ post }: PostDetailsPageViewProps) => {
 			isClosable: true,
 		})
 		onDeleteModalClose()
-		router.push('/')
+		void router.push('/')
+	}
+	const { data: post, isLoading } = useSWR(['post', id], fetcher)
+
+	if (typeof id !== 'string') {
+		return <Box>No id received</Box>
+	}
+
+	if (isLoading) {
+		return <Box>LOADING...</Box>
+	}
+
+	if (!post) {
+		return <Box>No post found for id &quot;{id}&quot;</Box>
 	}
 
 	return (
 		<>
+			<NextSeo title="Ver momento" />
 			<HStack justifyContent="end">
 				<IconButton
 					aria-label="Borrar este momento"
@@ -60,7 +86,7 @@ const PostDetailsPageView = ({ post }: PostDetailsPageViewProps) => {
 					colorScheme="red"
 					onClick={onDeleteModalOpen}
 				/>
-				<Link href={`momento/editar/${post.id}`}>Editar</Link>
+				<Link href={`/momento/${post.id}/editar`}>Editar</Link>
 			</HStack>
 			<Card key={post.id}>
 				<CardHeader>
@@ -89,4 +115,4 @@ const PostDetailsPageView = ({ post }: PostDetailsPageViewProps) => {
 	)
 }
 
-export default PostDetailsPageView
+export default PostDetailsPage

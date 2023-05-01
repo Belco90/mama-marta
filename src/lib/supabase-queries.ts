@@ -1,16 +1,20 @@
 import { supabase } from '~/lib/supabase-client'
 
+// TODO: move to api routes
 async function retrieveAllPosts() {
-	return supabase.from('post').select('*').order('happenedAt')
-}
+	const { data, error } = await supabase
+		.from('post')
+		.select('*')
+		.order('happenedAt')
 
-async function createPost() {
-	// 1) upload the file with a UUID as name, including extension
-	// 2) insert the new post with "pictureName" manually filled with the previous UUID + ext
-	return Promise.resolve(undefined)
+	if (error) {
+		throw new Error(error.message)
+	}
+
+	return data
 }
 
 type AllPostsResponse = Awaited<ReturnType<typeof retrieveAllPosts>>
-type Post = NonNullable<AllPostsResponse['data']>[number]
+type Post = NonNullable<AllPostsResponse>[number]
 
-export { retrieveAllPosts, createPost, type Post }
+export { retrieveAllPosts, type Post }
