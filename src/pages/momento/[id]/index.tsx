@@ -32,7 +32,6 @@ const PostDetailsPage = () => {
 	} = useDisclosure()
 
 	const handleDeletePost = async () => {
-		// TODO: use SWR mutation
 		await deletePost(id)
 
 		toast({

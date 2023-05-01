@@ -16,7 +16,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
-import useSWR from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 
 import { retrievePost, updatePost } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
@@ -25,6 +25,7 @@ const PostDeletePage = () => {
 	const router = useRouter()
 	const { id } = router.query as { id: string }
 	const toast = useToast()
+	const { mutate } = useSWRConfig()
 
 	const { data: post, isLoading } = useSWR(
 		['post', id],
@@ -42,15 +43,18 @@ const PostDeletePage = () => {
 		}
 		postData.description ||= null
 
-		// TODO: use SWR mutation
-		await updatePost(id, postData)
+		const updatedPost = await updatePost(id, postData)
+		await mutate(['post', id], updatedPost, {
+			populateCache: true,
+			revalidate: false,
+		})
 
 		toast({
 			title: 'Momento actualizado correctamente',
 			status: 'success',
 			isClosable: true,
 		})
-		void router.push('/')
+		void router.push(`/momento/${id}`)
 	}
 
 	if (isLoading) {

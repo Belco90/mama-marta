@@ -30,7 +30,6 @@ const NewPostPage = () => {
 		}
 		postData.description ||= null
 
-		// TODO: use SWR mutation
 		await createPost(postData)
 
 		toast({
