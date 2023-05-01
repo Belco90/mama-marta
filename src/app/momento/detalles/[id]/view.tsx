@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from '@chakra-ui/next-js'
 import {
 	Card,
 	CardBody,
@@ -13,7 +14,7 @@ import {
 	useToast,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
-import { HiTrash, HiPencil } from 'react-icons/hi'
+import { HiTrash } from 'react-icons/hi'
 
 import DeletePostAlertDialog from './DeletePostAlertDialog'
 
@@ -59,11 +60,7 @@ const PostDetailsPageView = ({ post }: PostDetailsPageViewProps) => {
 					colorScheme="red"
 					onClick={onDeleteModalOpen}
 				/>
-				<IconButton
-					aria-label="Editar este momento"
-					icon={<HiPencil />}
-					colorScheme="secondary"
-				/>
+				<Link href={`momento/editar/${post.id}`}>Editar</Link>
 			</HStack>
 			<Card key={post.id}>
 				<CardHeader>
