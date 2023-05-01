@@ -4,6 +4,7 @@ import {
 	type Theme,
 	withDefaultColorScheme,
 } from '@chakra-ui/react'
+import { Inter, Roboto_Mono } from 'next/font/google'
 
 type ExtendedTheme = Theme & {
 	colors: { primary: ColorHues; secondary: ColorHues; accent: ColorHues }
@@ -48,6 +49,14 @@ const accentColor: ColorHues = {
 	900: '#1a1400',
 }
 
+const interFont = Inter({
+	subsets: ['latin'],
+})
+
+const robotoMonoFont = Roboto_Mono({
+	subsets: ['latin'],
+})
+
 const themeExtensions = {
 	styles: { global: { 'html, body, #__next': { height: '100%' } } },
 	config: {
@@ -63,9 +72,9 @@ const themeExtensions = {
 		yellow: accentColor,
 	},
 	fonts: {
-		heading: 'var(--font-inter)',
-		body: 'var(--font-inter)',
-		mono: 'var(--font-roboto-mono)',
+		heading: interFont.style.fontFamily,
+		body: interFont.style.fontFamily,
+		mono: robotoMonoFont.style.fontFamily,
 	},
 }
 
