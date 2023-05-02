@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
 
+import MainLayout from '~/components/MainLayout'
 import { createPost } from '~/lib/supabase-queries'
 
 const NewPostPage = () => {
@@ -42,32 +43,34 @@ const NewPostPage = () => {
 	return (
 		<>
 			<NextSeo title="Crear momento" />
-			<form onSubmit={handleSubmitPost}>
-				<VStack gap={4} alignItems="start">
-					<Heading>Crea un nuevo momento</Heading>
+			<MainLayout>
+				<form onSubmit={handleSubmitPost}>
+					<VStack gap={4} alignItems="start">
+						<Heading>Crea un nuevo momento</Heading>
 
-					<FormControl isRequired>
-						<FormLabel>Foto</FormLabel>
-						<Input name="picture" type="file" accept="image/*" />
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Foto</FormLabel>
+							<Input name="picture" type="file" accept="image/*" />
+						</FormControl>
 
-					<FormControl isRequired>
-						<FormLabel>Título</FormLabel>
-						<Input name="title" />
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Título</FormLabel>
+							<Input name="title" />
+						</FormControl>
 
-					<FormControl isRequired>
-						<FormLabel>Fecha</FormLabel>
-						<Input name="happenedAt" type="date" />
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Fecha</FormLabel>
+							<Input name="happenedAt" type="date" />
+						</FormControl>
 
-					<FormControl>
-						<FormLabel>Descripción</FormLabel>
-						<Textarea name="description" />
-					</FormControl>
-					<Button type="submit">Crear</Button>
-				</VStack>
-			</form>
+						<FormControl>
+							<FormLabel>Descripción</FormLabel>
+							<Textarea name="description" />
+						</FormControl>
+						<Button type="submit">Crear</Button>
+					</VStack>
+				</form>
+			</MainLayout>
 		</>
 	)
 }

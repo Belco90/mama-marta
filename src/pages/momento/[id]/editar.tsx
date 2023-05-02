@@ -17,6 +17,7 @@ import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
+import MainLayout from '~/components/MainLayout'
 import { retrievePost, updatePost } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
 
@@ -67,49 +68,51 @@ const PostDeletePage = () => {
 	return (
 		<>
 			<NextSeo title="Editar momento" />
-			<form onSubmit={handleEditPost}>
-				<VStack gap={4} alignItems="start">
-					<Heading>Editar un momento existente</Heading>
+			<MainLayout>
+				<form onSubmit={handleEditPost}>
+					<VStack gap={4} alignItems="start">
+						<Heading>Editar un momento existente</Heading>
 
-					<FormControl>
-						<FormLabel>Foto</FormLabel>
-						<Image
-							src={getStoragePublicUrl(post.pictureName)}
-							alt={post.title}
-							boxSize="150px"
-							objectFit="cover"
-						/>
-						<FormHelperText>
-							La foto no puede ser editada.{' '}
-							<Link href={`momento/${post.id}`}>Elimina este momento</Link> y
-							crea uno nuevo si quieres cambiarla.
-						</FormHelperText>
-					</FormControl>
+						<FormControl>
+							<FormLabel>Foto</FormLabel>
+							<Image
+								src={getStoragePublicUrl(post.pictureName)}
+								alt={post.title}
+								boxSize="150px"
+								objectFit="cover"
+							/>
+							<FormHelperText>
+								La foto no puede ser editada.{' '}
+								<Link href={`momento/${post.id}`}>Elimina este momento</Link> y
+								crea uno nuevo si quieres cambiarla.
+							</FormHelperText>
+						</FormControl>
 
-					<FormControl isRequired>
-						<FormLabel>Título</FormLabel>
-						<Input name="title" defaultValue={post.title} />
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Título</FormLabel>
+							<Input name="title" defaultValue={post.title} />
+						</FormControl>
 
-					<FormControl isRequired>
-						<FormLabel>Fecha</FormLabel>
-						<Input
-							name="happenedAt"
-							type="date"
-							defaultValue={post.happenedAt}
-						/>
-					</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Fecha</FormLabel>
+							<Input
+								name="happenedAt"
+								type="date"
+								defaultValue={post.happenedAt}
+							/>
+						</FormControl>
 
-					<FormControl>
-						<FormLabel>Descripción</FormLabel>
-						<Textarea
-							name="description"
-							defaultValue={post.description ?? ''}
-						/>
-					</FormControl>
-					<Button type="submit">Editar</Button>
-				</VStack>
-			</form>
+						<FormControl>
+							<FormLabel>Descripción</FormLabel>
+							<Textarea
+								name="description"
+								defaultValue={post.description ?? ''}
+							/>
+						</FormControl>
+						<Button type="submit">Editar</Button>
+					</VStack>
+				</form>
+			</MainLayout>
 		</>
 	)
 }

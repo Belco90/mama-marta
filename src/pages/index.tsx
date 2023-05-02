@@ -10,6 +10,7 @@ import {
 import Link from 'next/link'
 import useSWR from 'swr'
 
+import MainLayout from '~/components/MainLayout'
 import { retrieveAllPosts } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
 
@@ -25,27 +26,29 @@ const HomePage = () => {
 	}
 
 	return (
-		<VStack>
-			<Link href="/crear-momento">Crear momento</Link>
-			{posts.map((post) => (
-				<Card key={post.id} width="full">
-					<CardHeader>
-						<Text fontWeight="bold">
-							<Link href={`/momento/${post.id}`}>{post.title}</Link>
-						</Text>
-					</CardHeader>
-					<CardBody>
-						<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
-						<Image
-							src={getStoragePublicUrl(post.pictureName)}
-							alt={post.title}
-							boxSize="150px"
-							objectFit="cover"
-						/>
-					</CardBody>
-				</Card>
-			))}
-		</VStack>
+		<MainLayout>
+			<VStack>
+				<Link href="/crear-momento">Crear momento</Link>
+				{posts.map((post) => (
+					<Card key={post.id} width="full">
+						<CardHeader>
+							<Text fontWeight="bold">
+								<Link href={`/momento/${post.id}`}>{post.title}</Link>
+							</Text>
+						</CardHeader>
+						<CardBody>
+							<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
+							<Image
+								src={getStoragePublicUrl(post.pictureName)}
+								alt={post.title}
+								boxSize="150px"
+								objectFit="cover"
+							/>
+						</CardBody>
+					</Card>
+				))}
+			</VStack>
+		</MainLayout>
 	)
 }
 

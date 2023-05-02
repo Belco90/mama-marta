@@ -3,7 +3,6 @@ import { type AppProps } from 'next/app'
 import { Inter, Roboto_Mono } from 'next/font/google'
 import { DefaultSeo, type DefaultSeoProps } from 'next-seo'
 
-import MainLayout from '~/components/MainLayout'
 import customTheme from '~/custom-theme'
 
 const DEFAULT_SEO: DefaultSeoProps = {
@@ -36,9 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			`}</style>
 			<DefaultSeo {...DEFAULT_SEO} />
 			<ChakraProvider theme={customTheme}>
-				<MainLayout>
-					<Component {...pageProps} />
-				</MainLayout>
+				<Component {...pageProps} />
 			</ChakraProvider>
 		</>
 	)

@@ -18,6 +18,7 @@ import { HiTrash } from 'react-icons/hi'
 import useSWR from 'swr'
 
 import DeletePostAlertDialog from '~/components/DeletePostAlertDialog'
+import MainLayout from '~/components/MainLayout'
 import { deletePost, retrievePost } from '~/lib/supabase-queries'
 import { getStoragePublicUrl } from '~/lib/utils'
 
@@ -58,38 +59,40 @@ const PostDetailsPage = () => {
 	return (
 		<>
 			<NextSeo title="Ver momento" />
-			<HStack justifyContent="end">
-				<IconButton
-					aria-label="Borrar este momento"
-					icon={<HiTrash />}
-					colorScheme="red"
-					onClick={onDeleteModalOpen}
-				/>
-				<Link href={`/momento/${post.id}/editar`}>Editar</Link>
-			</HStack>
-			<Card key={post.id}>
-				<CardHeader>
-					<Text fontWeight="bold">{post.title}</Text>
-				</CardHeader>
-				<CardBody>
-					<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
-					<Image
-						src={getStoragePublicUrl(post.pictureName)}
-						alt={post.title}
-						boxSize="150px"
-						objectFit="cover"
+			<MainLayout>
+				<HStack justifyContent="end">
+					<IconButton
+						aria-label="Borrar este momento"
+						icon={<HiTrash />}
+						colorScheme="red"
+						onClick={onDeleteModalOpen}
 					/>
-				</CardBody>
-				{!!post.description && <CardFooter>{post.description}</CardFooter>}
-			</Card>
+					<Link href={`/momento/${post.id}/editar`}>Editar</Link>
+				</HStack>
+				<Card key={post.id}>
+					<CardHeader>
+						<Text fontWeight="bold">{post.title}</Text>
+					</CardHeader>
+					<CardBody>
+						<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
+						<Image
+							src={getStoragePublicUrl(post.pictureName)}
+							alt={post.title}
+							boxSize="150px"
+							objectFit="cover"
+						/>
+					</CardBody>
+					{!!post.description && <CardFooter>{post.description}</CardFooter>}
+				</Card>
 
-			{isDeleteModalOpen && (
-				<DeletePostAlertDialog
-					post={post}
-					onDelete={handleDeletePost}
-					onClose={onDeleteModalClose}
-				/>
-			)}
+				{isDeleteModalOpen && (
+					<DeletePostAlertDialog
+						post={post}
+						onDelete={handleDeletePost}
+						onClose={onDeleteModalClose}
+					/>
+				)}
+			</MainLayout>
 		</>
 	)
 }
