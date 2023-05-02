@@ -50,10 +50,6 @@ const accentColor: ColorHues = {
 
 const themeExtensions = {
 	styles: { global: { 'html, body, #__next': { height: '100%' } } },
-	config: {
-		initialColorMode: 'light',
-		useSystemColorMode: false,
-	},
 	colors: {
 		primary: primaryColor,
 		secondary: secondaryColor,
