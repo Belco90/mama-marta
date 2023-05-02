@@ -1,4 +1,12 @@
-import { Box, Container, Flex, HStack, Show, Spacer } from '@chakra-ui/react'
+import {
+	Box,
+	Text,
+	Container,
+	Flex,
+	HStack,
+	Show,
+	Spacer,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -20,7 +28,9 @@ const NavBar = () => {
 						bgPosition="0 80%"
 						bgRepeat="no-repeat"
 					>
-						<Show above="md">Mama Marta</Show> <Show below="md">MM</Show>{' '}
+						<Text as="span" color="secondary.700">
+							<Show above="md">Mama Marta</Show> <Show below="md">MM</Show>
+						</Text>{' '}
 						<span role="img" aria-label="Corazón naranja">
 							🧡
 						</span>

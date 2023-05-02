@@ -3,6 +3,7 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
+	Heading,
 	Image,
 	Text,
 	VStack,
@@ -27,6 +28,9 @@ const HomePage = () => {
 
 	return (
 		<MainLayout>
+			<Heading as="h1" pb={2} variant="gradient">
+				Tus momentos
+			</Heading>
 			<VStack>
 				{posts.map((post) => (
 					<Card key={post.id} width="full">
