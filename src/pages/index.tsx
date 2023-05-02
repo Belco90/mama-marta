@@ -28,7 +28,6 @@ const HomePage = () => {
 	return (
 		<MainLayout>
 			<VStack>
-				<Link href="/crear-momento">Crear momento</Link>
 				{posts.map((post) => (
 					<Card key={post.id} width="full">
 						<CardHeader>
