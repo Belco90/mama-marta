@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { type AppProps } from 'next/app'
+import { Inter, Roboto_Mono } from 'next/font/google'
 import { DefaultSeo, type DefaultSeoProps } from 'next-seo'
 
 import MainLayout from '~/components/MainLayout'
@@ -16,9 +17,23 @@ const DEFAULT_SEO: DefaultSeoProps = {
 	},
 }
 
+const interFont = Inter({
+	subsets: ['latin'],
+})
+
+const robotoMonoFont = Roboto_Mono({
+	subsets: ['latin'],
+})
+
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
+			<style jsx global>{`
+				:root {
+					--font-inter: ${interFont.style.fontFamily};
+					--font-roboto-mono: ${robotoMonoFont.style.fontFamily};
+				}
+			`}</style>
 			<DefaultSeo {...DEFAULT_SEO} />
 			<ChakraProvider theme={customTheme}>
 				<MainLayout>
