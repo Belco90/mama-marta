@@ -25,10 +25,10 @@ const HomePage = () => {
 	}
 
 	return (
-		<VStack width="full">
+		<VStack>
 			<Link href="/crear-momento">Crear momento</Link>
 			{posts.map((post) => (
-				<Card key={post.id}>
+				<Card key={post.id} width="full">
 					<CardHeader>
 						<Text fontWeight="bold">
 							<Link href={`/momento/${post.id}`}>{post.title}</Link>
