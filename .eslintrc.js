@@ -14,12 +14,14 @@ module.exports = {
 		'no-restricted-imports': [
 			'error',
 			{
-				name: '@testing-library/react',
-				message: 'Please import from `test-utils` instead.',
+				name: '@supabase/auth-helpers-react',
+				importNames: ['useSupabaseClient'],
+				message: 'Please import from `hooks/useSupabaseClient` instead.',
 			},
 		],
 
 		// React
+		'react/jsx-no-undef': 'off',
 		'react/self-closing-comp': 'error',
 		'react/react-in-jsx-scope': 'off',
 		'react/jsx-boolean-value': 'error',

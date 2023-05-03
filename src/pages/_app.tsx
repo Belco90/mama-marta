@@ -1,9 +1,16 @@
 import { ChakraProvider } from '@chakra-ui/react'
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import {
+	type Session,
+	SessionContextProvider,
+} from '@supabase/auth-helpers-react'
 import { type AppProps } from 'next/app'
 import { Inter, Roboto_Mono } from 'next/font/google'
 import { DefaultSeo, type DefaultSeoProps } from 'next-seo'
+import { useState } from 'react'
 
 import customTheme from '~/custom-theme'
+import { type Database } from '~/lib/database.types'
 
 const DEFAULT_SEO: DefaultSeoProps = {
 	titleTemplate: '%s | Mama Marta',
@@ -24,7 +31,16 @@ const robotoMonoFont = Roboto_Mono({
 	subsets: ['latin'],
 })
 
-function MyApp({ Component, pageProps }: AppProps) {
+function initBrowserSupabaseClient() {
+	return createBrowserSupabaseClient<Database>()
+}
+
+function MyApp({
+	Component,
+	pageProps,
+}: AppProps<{ initialSession: Session }>) {
+	const [supabaseClient] = useState(initBrowserSupabaseClient())
+
 	return (
 		<>
 			<style jsx global>{`
@@ -35,7 +51,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 			`}</style>
 			<DefaultSeo {...DEFAULT_SEO} />
 			<ChakraProvider theme={customTheme}>
-				<Component {...pageProps} />
+				<SessionContextProvider
+					supabaseClient={supabaseClient}
+					initialSession={pageProps.initialSession}
+				>
+					<Component {...pageProps} />
+				</SessionContextProvider>
 			</ChakraProvider>
 		</>
 	)
