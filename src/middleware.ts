@@ -1,4 +1,3 @@
-// import { NextResponse } from 'next/server'
 import { createMiddlewareSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { type NextRequest, NextResponse } from 'next/server'
 
@@ -7,7 +6,6 @@ import { LOGIN_URL } from '~/lib/utils'
 export async function middleware(req: NextRequest) {
 	const res = NextResponse.next()
 	const supabase = createMiddlewareSupabaseClient({ req, res })
-	// Check if we have a session
 	const {
 		data: { session },
 	} = await supabase.auth.getSession()
