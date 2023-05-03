@@ -1,10 +1,7 @@
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 import { type Database } from '~/lib/database.types'
 
-const supabase = createClient<Database>(
-	process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'unknown',
-	process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? 'unknown'
-)
+const supabase = createBrowserSupabaseClient<Database>()
 
 export { supabase }
