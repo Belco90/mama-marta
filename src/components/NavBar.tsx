@@ -1,14 +1,20 @@
 import {
 	Box,
-	Text,
 	Container,
 	Flex,
-	HStack,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	Spacer,
-	Button,
+	Text,
 } from '@chakra-ui/react'
+import { useSession } from '@supabase/auth-helpers-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { GiHamburgerMenu } from 'react-icons/gi'
+import { HiOutlineHome, HiPlus, HiPower } from 'react-icons/hi2'
 
 import { useSupabaseClient } from '~/hooks/useSupabaseClient'
 import { LOGIN_URL } from '~/lib/utils'
@@ -16,7 +22,7 @@ import { LOGIN_URL } from '~/lib/utils'
 const NavBar = () => {
 	const router = useRouter()
 	const supabase = useSupabaseClient()
-	const isHomePage = router.asPath === '/'
+	const session = useSession()
 
 	const handleLogout = async () => {
 		await supabase.auth.signOut()
@@ -45,22 +51,31 @@ const NavBar = () => {
 					</Box>
 					<Spacer />
 
-					<HStack
-						as="nav"
-						spacing={[2, 4]}
-						align="center"
-						justify="center"
-						shouldWrapChildren
-					>
-						{isHomePage ? (
-							<Link href="/recuerdo/crear">Crear recuerdo</Link>
-						) : (
-							<Link href="/">Inicio</Link>
-						)}
-						<Button size="sm" onClick={handleLogout} variant="ghost">
-							Cerrar sesión
-						</Button>
-					</HStack>
+					<Menu>
+						<MenuButton
+							as={IconButton}
+							aria-label="Opciones"
+							icon={<GiHamburgerMenu />}
+							variant="outline"
+						/>
+						<MenuList>
+							<Link href="/" legacyBehavior passHref>
+								<MenuItem icon={<HiOutlineHome />} as="a">
+									Inicio
+								</MenuItem>
+							</Link>
+							<Link href="/recuerdo/crear" legacyBehavior passHref>
+								<MenuItem icon={<HiPlus />} as="a">
+									Crear recuerdo
+								</MenuItem>
+							</Link>
+							{!!session && (
+								<MenuItem icon={<HiPower />} onClick={handleLogout}>
+									Cerrar sesión
+								</MenuItem>
+							)}
+						</MenuList>
+					</Menu>
 				</Flex>
 			</Container>
 		</Box>
