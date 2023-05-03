@@ -42,12 +42,14 @@ const NavBar = () => {
 						bgPosition="0 80%"
 						bgRepeat="no-repeat"
 					>
-						<Text as="span" color="secondary.700">
-							Mama Marta
-						</Text>{' '}
-						<span role="img" aria-label="Corazón naranja">
-							🧡
-						</span>
+						<Link href="/">
+							<Text as="span" color="secondary.700">
+								Mama Marta
+							</Text>{' '}
+							<span role="img" aria-label="Corazón naranja">
+								🧡
+							</span>
+						</Link>
 					</Box>
 					<Spacer />
 
