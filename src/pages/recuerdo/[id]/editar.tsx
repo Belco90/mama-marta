@@ -9,9 +9,10 @@ import {
 	Input,
 	Textarea,
 	useToast,
+	Link,
 	VStack,
 } from '@chakra-ui/react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
@@ -80,7 +81,13 @@ const EditMemoryPage = () => {
 						/>
 						<FormHelperText>
 							La foto no puede ser editada.{' '}
-							<Link href={`recuerdo/${memory.id}`}>Elimina este recuerdo</Link>{' '}
+							<Link
+								as={NextLink}
+								href={`/recuerdo/${memory.id}`}
+								textDecoration="underline"
+							>
+								Elimina este recuerdo
+							</Link>{' '}
 							y crea uno nuevo si quieres cambiarla.
 						</FormHelperText>
 					</FormControl>

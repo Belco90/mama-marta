@@ -52,6 +52,7 @@ function MyApp({
 					initialSession={pageProps.initialSession}
 				>
 					<MainLayout>
+						{/* TODO: show loading spinner on navigation */}
 						<Component {...pageProps} />
 					</MainLayout>
 				</SessionContextProvider>
