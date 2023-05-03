@@ -1,11 +1,27 @@
-import { Box, Text, Container, Flex, HStack, Spacer } from '@chakra-ui/react'
+import {
+	Box,
+	Text,
+	Container,
+	Flex,
+	HStack,
+	Spacer,
+	Button,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { useSupabaseClient } from '~/hooks/useSupabaseClient'
+import { LOGIN_URL } from '~/lib/utils'
+
 const NavBar = () => {
 	const router = useRouter()
-
+	const supabase = useSupabaseClient()
 	const isHomePage = router.asPath === '/'
+
+	const handleLogout = async () => {
+		await supabase.auth.signOut()
+		void router.push(LOGIN_URL)
+	}
 
 	return (
 		<Box as="header" zIndex="banner" shadow="lg" width="full">
@@ -41,6 +57,9 @@ const NavBar = () => {
 						) : (
 							<Link href="/">Inicio</Link>
 						)}
+						<Button size="sm" onClick={handleLogout} variant="ghost">
+							Cerrar sesión
+						</Button>
 					</HStack>
 				</Flex>
 			</Container>
