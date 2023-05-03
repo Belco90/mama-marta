@@ -19,7 +19,6 @@ import { HiTrash } from 'react-icons/hi'
 import useSWR from 'swr'
 
 import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
-import MainLayout from '~/components/MainLayout'
 import { deleteMemory, retrieveMemory } from '~/lib/supabase-queries'
 import { getPicturePublicUrl } from '~/lib/utils'
 
@@ -60,7 +59,7 @@ const DetailsMemoryPage = () => {
 	return (
 		<>
 			<NextSeo title="Ver recuerdo" />
-			<MainLayout>
+			<>
 				<Heading variant="main">Un recuerdo...</Heading>
 				<HStack justifyContent="end">
 					<IconButton
@@ -96,7 +95,7 @@ const DetailsMemoryPage = () => {
 						onClose={onDeleteModalClose}
 					/>
 				)}
-			</MainLayout>
+			</>
 		</>
 	)
 }

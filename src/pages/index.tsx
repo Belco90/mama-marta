@@ -11,7 +11,6 @@ import {
 import Link from 'next/link'
 import useSWR from 'swr'
 
-import MainLayout from '~/components/MainLayout'
 import { retrieveAllMemories } from '~/lib/supabase-queries'
 import { getPicturePublicUrl } from '~/lib/utils'
 
@@ -30,7 +29,7 @@ const HomePage = () => {
 	}
 
 	return (
-		<MainLayout>
+		<>
 			<Heading variant="main">Mis recuerdos</Heading>
 			<VStack>
 				{memories.map((memory) => (
@@ -52,7 +51,7 @@ const HomePage = () => {
 					</Card>
 				))}
 			</VStack>
-		</MainLayout>
+		</>
 	)
 }
 

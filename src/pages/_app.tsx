@@ -8,6 +8,7 @@ import { Inter, Roboto_Mono } from 'next/font/google'
 import { DefaultSeo, type DefaultSeoProps } from 'next-seo'
 import { useState } from 'react'
 
+import MainLayout from '~/components/MainLayout'
 import customTheme from '~/custom-theme'
 import { supabase } from '~/lib/supabase-client'
 
@@ -50,7 +51,9 @@ function MyApp({
 					supabaseClient={supabaseClient}
 					initialSession={pageProps.initialSession}
 				>
-					<Component {...pageProps} />
+					<MainLayout>
+						<Component {...pageProps} />
+					</MainLayout>
 				</SessionContextProvider>
 			</ChakraProvider>
 		</>

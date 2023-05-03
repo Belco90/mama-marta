@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation'
 import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
 
-import MainLayout from '~/components/MainLayout'
 import { createMemory } from '~/lib/supabase-queries'
 
 const CreateMemoryPage = () => {
@@ -43,33 +42,31 @@ const CreateMemoryPage = () => {
 	return (
 		<>
 			<NextSeo title="Crear recuerdo" />
-			<MainLayout>
-				<Heading variant="main">Crea un nuevo recuerdo</Heading>
-				<form onSubmit={handleCreateMemory}>
-					<VStack gap={4} alignItems="start">
-						<FormControl isRequired>
-							<FormLabel>Foto</FormLabel>
-							<Input name="picture" type="file" accept="image/*" />
-						</FormControl>
+			<Heading variant="main">Crea un nuevo recuerdo</Heading>
+			<form onSubmit={handleCreateMemory}>
+				<VStack gap={4} alignItems="start">
+					<FormControl isRequired>
+						<FormLabel>Foto</FormLabel>
+						<Input name="picture" type="file" accept="image/*" />
+					</FormControl>
 
-						<FormControl isRequired>
-							<FormLabel>Título</FormLabel>
-							<Input name="title" />
-						</FormControl>
+					<FormControl isRequired>
+						<FormLabel>Título</FormLabel>
+						<Input name="title" />
+					</FormControl>
 
-						<FormControl isRequired>
-							<FormLabel>Fecha</FormLabel>
-							<Input name="happenedAt" type="date" />
-						</FormControl>
+					<FormControl isRequired>
+						<FormLabel>Fecha</FormLabel>
+						<Input name="happenedAt" type="date" />
+					</FormControl>
 
-						<FormControl>
-							<FormLabel>Descripción</FormLabel>
-							<Textarea name="description" />
-						</FormControl>
-						<Button type="submit">Crear</Button>
-					</VStack>
-				</form>
-			</MainLayout>
+					<FormControl>
+						<FormLabel>Descripción</FormLabel>
+						<Textarea name="description" />
+					</FormControl>
+					<Button type="submit">Crear</Button>
+				</VStack>
+			</form>
 		</>
 	)
 }

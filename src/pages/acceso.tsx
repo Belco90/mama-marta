@@ -5,7 +5,6 @@ import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { useRouter } from 'next/router'
 import { type ComponentProps } from 'react'
 
-import MainLayout from '~/components/MainLayout'
 import { useSupabaseClient } from '~/hooks/useSupabaseClient'
 
 const ES_LOCALIZATION: NonNullable<
@@ -32,18 +31,16 @@ const LoginPage = () => {
 	}
 
 	return (
-		<MainLayout>
-			<Container maxWidth="container.sm">
-				<Auth
-					supabaseClient={supabase}
-					redirectTo="/"
-					appearance={{ theme: ThemeSupa }}
-					providers={[]}
-					showLinks={false}
-					localization={{ variables: ES_LOCALIZATION }}
-				/>
-			</Container>
-		</MainLayout>
+		<Container maxWidth="container.sm">
+			<Auth
+				supabaseClient={supabase}
+				redirectTo="/"
+				appearance={{ theme: ThemeSupa }}
+				providers={[]}
+				showLinks={false}
+				localization={{ variables: ES_LOCALIZATION }}
+			/>
+		</Container>
 	)
 }
 
