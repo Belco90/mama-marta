@@ -11,20 +11,20 @@ import {
 } from '@chakra-ui/react'
 import { useRef } from 'react'
 
-import { type Post } from '~/lib/supabase-queries'
-import { getStoragePublicUrl } from '~/lib/utils'
+import { type Memory } from '~/lib/supabase-queries'
+import { getPicturePublicUrl } from '~/lib/utils'
 
-interface DeletePostAlertDialogProps {
-	post: Post
+interface DeleteMemoryAlertDialogProps {
+	memory: Memory
 	onClose: () => void
 	onDelete: () => void
 }
 
-const DeletePostAlertDialog = ({
-	post,
+const DeleteMemoryAlertDialog = ({
+	memory,
 	onDelete,
 	onClose,
-}: DeletePostAlertDialogProps) => {
+}: DeleteMemoryAlertDialogProps) => {
 	const cancelRef = useRef<HTMLButtonElement | null>(null)
 
 	return (
@@ -32,16 +32,16 @@ const DeletePostAlertDialog = ({
 			<AlertDialogOverlay>
 				<AlertDialogContent>
 					<AlertDialogHeader fontSize="lg" fontWeight="bold">
-						Borrar momento
+						Borrar recuerdo
 					</AlertDialogHeader>
 
 					<AlertDialogBody>
-						¿Estás seguro de que quieres borrar el momento titulado
-						<Text as="em">&quot;{post.title}&quot;</Text> para siempre? Esta
+						¿Estás seguro de que quieres borrar el recuerdo titulado
+						<Text as="em">&quot;{memory.title}&quot;</Text> para siempre? Esta
 						acción no se puede deshacer.
 						<Image
-							src={getStoragePublicUrl(post.pictureName)}
-							alt={post.title}
+							src={getPicturePublicUrl(memory.pictureName)}
+							alt={memory.title}
 							boxSize="150px"
 							objectFit="cover"
 							mx="auto"
@@ -58,7 +58,7 @@ const DeletePostAlertDialog = ({
 							Cancelar
 						</Button>
 						<Button onClick={onDelete} colorScheme="red" ml={3}>
-							Confirmar
+							Borrar
 						</Button>
 					</AlertDialogFooter>
 				</AlertDialogContent>
@@ -67,4 +67,4 @@ const DeletePostAlertDialog = ({
 	)
 }
 
-export default DeletePostAlertDialog
+export default DeleteMemoryAlertDialog

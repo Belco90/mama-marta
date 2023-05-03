@@ -1,12 +1,4 @@
-import {
-	Box,
-	Text,
-	Container,
-	Flex,
-	HStack,
-	Show,
-	Spacer,
-} from '@chakra-ui/react'
+import { Box, Text, Container, Flex, HStack, Spacer } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -29,7 +21,7 @@ const NavBar = () => {
 						bgRepeat="no-repeat"
 					>
 						<Text as="span" color="secondary.700">
-							<Show above="md">Mama Marta</Show> <Show below="md">MM</Show>
+							Mama Marta
 						</Text>{' '}
 						<span role="img" aria-label="Corazón naranja">
 							🧡
@@ -45,7 +37,7 @@ const NavBar = () => {
 						shouldWrapChildren
 					>
 						{isHomePage ? (
-							<Link href="/crear-momento">Crear momento</Link>
+							<Link href="/recuerdo/crear">Crear recuerdo</Link>
 						) : (
 							<Link href="/">Inicio</Link>
 						)}

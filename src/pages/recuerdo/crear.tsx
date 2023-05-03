@@ -13,27 +13,27 @@ import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
 
 import MainLayout from '~/components/MainLayout'
-import { createPost } from '~/lib/supabase-queries'
+import { createMemory } from '~/lib/supabase-queries'
 
-const NewPostPage = () => {
+const CreateMemoryPage = () => {
 	const router = useRouter()
 	const toast = useToast()
-	const handleSubmitPost = async (event: FormEvent<HTMLFormElement>) => {
+	const handleCreateMemory = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
 		const formData = new FormData(event.currentTarget)
-		const postData = Object.fromEntries(formData) as {
+		const memoryData = Object.fromEntries(formData) as {
 			title: string
 			description: string | null
 			happenedAt: string
 			picture: File
 		}
-		postData.description ||= null
+		memoryData.description ||= null
 
-		await createPost(postData)
+		await createMemory(memoryData)
 
 		toast({
-			title: 'Nuevo momento creado correctamente',
+			title: 'Nuevo recuerdo creado correctamente',
 			status: 'success',
 			isClosable: true,
 		})
@@ -42,11 +42,11 @@ const NewPostPage = () => {
 
 	return (
 		<>
-			<NextSeo title="Crear momento" />
+			<NextSeo title="Crear recuerdo" />
 			<MainLayout>
-				<form onSubmit={handleSubmitPost}>
+				<form onSubmit={handleCreateMemory}>
 					<VStack gap={4} alignItems="start">
-						<Heading>Crea un nuevo momento</Heading>
+						<Heading>Crea un nuevo recuerdo</Heading>
 
 						<FormControl isRequired>
 							<FormLabel>Foto</FormLabel>
@@ -75,4 +75,4 @@ const NewPostPage = () => {
 	)
 }
 
-export default NewPostPage
+export default CreateMemoryPage

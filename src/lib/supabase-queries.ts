@@ -18,9 +18,9 @@ async function uploadPicture(file: File) {
 	return filePath
 }
 
-async function retrieveAllPosts() {
+async function retrieveAllMemories() {
 	const { data, error } = await supabase
-		.from('post')
+		.from('memories')
 		.select('*')
 		.order('happenedAt')
 
@@ -31,9 +31,9 @@ async function retrieveAllPosts() {
 	return data
 }
 
-async function retrievePost(id: PostRequestId) {
+async function retrieveMemory(id: RequestMemoryParamId) {
 	const { data, error } = await supabase
-		.from('post')
+		.from('memories')
 		.select('*')
 		.eq('id', id)
 		.single()
@@ -44,12 +44,14 @@ async function retrievePost(id: PostRequestId) {
 
 	return data
 }
-async function createPost(formData: PostRequestData) {
+async function createMemory(formData: RequestFormParams) {
 	const { picture, ...postData } = formData
 	const filePath = await uploadPicture(picture)
 
+	// TODO: make sure dates are in the correct format
+
 	const { data, error } = await supabase
-		.from('post')
+		.from('memories')
 		.insert({ ...postData, pictureName: filePath })
 		.select('*')
 		.single()
@@ -60,12 +62,14 @@ async function createPost(formData: PostRequestData) {
 
 	return data
 }
-async function updatePost(
-	id: PostRequestId,
-	formData: Omit<PostRequestData, 'picture'>
+async function updateMemory(
+	id: RequestMemoryParamId,
+	formData: Omit<RequestFormParams, 'picture'>
 ) {
+	// TODO: make sure dates are in the correct format
+
 	const { data, error } = await supabase
-		.from('post')
+		.from('memories')
 		.update(formData)
 		.eq('id', id)
 		.select('*')
@@ -77,8 +81,8 @@ async function updatePost(
 
 	return data
 }
-async function deletePost(id: PostRequestId) {
-	const { error } = await supabase.from('post').delete().eq('id', id)
+async function deleteMemory(id: RequestMemoryParamId) {
+	const { error } = await supabase.from('memories').delete().eq('id', id)
 
 	if (error) {
 		throw new Error(String(error))
@@ -87,18 +91,21 @@ async function deletePost(id: PostRequestId) {
 	return id
 }
 
-type AllPostsResponse = Awaited<ReturnType<typeof retrieveAllPosts>>
-type Post = NonNullable<AllPostsResponse>[number]
-type PostRequestId = string
-type PostRequestData = Pick<Post, 'title' | 'description' | 'happenedAt'> & {
+type AllMemoriesResponse = Awaited<ReturnType<typeof retrieveAllMemories>>
+type Memory = NonNullable<AllMemoriesResponse>[number]
+type RequestMemoryParamId = string
+type RequestFormParams = Pick<
+	Memory,
+	'title' | 'description' | 'happenedAt'
+> & {
 	picture: File
 }
 
 export {
-	retrieveAllPosts,
-	createPost,
-	retrievePost,
-	updatePost,
-	deletePost,
-	type Post,
+	retrieveAllMemories,
+	createMemory,
+	retrieveMemory,
+	updateMemory,
+	deleteMemory,
+	type Memory,
 }

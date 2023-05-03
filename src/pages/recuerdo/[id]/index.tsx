@@ -17,12 +17,12 @@ import { NextSeo } from 'next-seo'
 import { HiTrash } from 'react-icons/hi'
 import useSWR from 'swr'
 
-import DeletePostAlertDialog from '~/components/DeletePostAlertDialog'
+import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
 import MainLayout from '~/components/MainLayout'
-import { deletePost, retrievePost } from '~/lib/supabase-queries'
-import { getStoragePublicUrl } from '~/lib/utils'
+import { deleteMemory, retrieveMemory } from '~/lib/supabase-queries'
+import { getPicturePublicUrl } from '~/lib/utils'
 
-const PostDetailsPage = () => {
+const DetailsMemoryPage = () => {
 	const router = useRouter()
 	const { id } = router.query as { id: string }
 	const toast = useToast()
@@ -32,63 +32,65 @@ const PostDetailsPage = () => {
 		onClose: onDeleteModalClose,
 	} = useDisclosure()
 
-	const handleDeletePost = async () => {
-		await deletePost(id)
+	const handleDeleteMemory = async () => {
+		await deleteMemory(id)
 
 		toast({
-			title: 'Momento borrado correctamente',
+			title: 'Recuerdo borrado correctamente',
 			status: 'success',
 			isClosable: true,
 		})
 		onDeleteModalClose()
 		void router.push('/')
 	}
-	const { data: post, isLoading } = useSWR(
-		['post', id],
-		([, postId]: Array<string>) => retrievePost(postId)
+	const { data: memory, isLoading } = useSWR(
+		['memory', id],
+		([, memoryId]: Array<string>) => retrieveMemory(memoryId)
 	)
 
 	if (isLoading) {
 		return <Box>LOADING...</Box>
 	}
 
-	if (!post) {
-		return <Box>No post found for id &quot;{id}&quot;</Box>
+	if (!memory) {
+		return <Box>No memory found for id &quot;{id}&quot;</Box>
 	}
 
 	return (
 		<>
-			<NextSeo title="Ver momento" />
+			<NextSeo title="Ver recuerdo" />
 			<MainLayout>
 				<HStack justifyContent="end">
 					<IconButton
-						aria-label="Borrar este momento"
+						aria-label="Borrar este recuerdo"
 						icon={<HiTrash />}
 						colorScheme="red"
 						onClick={onDeleteModalOpen}
 					/>
-					<Link href={`/momento/${post.id}/editar`}>Editar</Link>
+					<Link href={`/recuerdo/${memory.id}/editar`}>Editar</Link>
 				</HStack>
-				<Card key={post.id}>
+				<Card key={memory.id}>
 					<CardHeader>
-						<Text fontWeight="bold">{post.title}</Text>
+						<Text fontWeight="bold">{memory.title}</Text>
 					</CardHeader>
 					<CardBody>
-						<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
+						<Text>{String(new Date(memory.happenedAt))}</Text>
 						<Image
-							src={getStoragePublicUrl(post.pictureName)}
-							alt={post.title}
+							src={getPicturePublicUrl(memory.pictureName)}
+							alt={memory.title}
 							boxSize="150px"
 							objectFit="cover"
 						/>
 					</CardBody>
-					{!!post.description && <CardFooter>{post.description}</CardFooter>}
+					{!!memory.description && (
+						<CardFooter>{memory.description}</CardFooter>
+					)}
 				</Card>
 
 				{isDeleteModalOpen && (
-					<DeletePostAlertDialog
-						post={post}
-						onDelete={handleDeletePost}
+					<DeleteMemoryAlertDialog
+						memory={memory}
+						onDelete={handleDeleteMemory}
 						onClose={onDeleteModalClose}
 					/>
 				)}
@@ -97,4 +99,4 @@ const PostDetailsPage = () => {
 	)
 }
 
-export default PostDetailsPage
+export default DetailsMemoryPage

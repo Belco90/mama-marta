@@ -12,38 +12,41 @@ import Link from 'next/link'
 import useSWR from 'swr'
 
 import MainLayout from '~/components/MainLayout'
-import { retrieveAllPosts } from '~/lib/supabase-queries'
-import { getStoragePublicUrl } from '~/lib/utils'
+import { retrieveAllMemories } from '~/lib/supabase-queries'
+import { getPicturePublicUrl } from '~/lib/utils'
 
 const HomePage = () => {
-	const { data: posts, isLoading } = useSWR('all-posts', retrieveAllPosts)
+	const { data: memories, isLoading } = useSWR(
+		'all-memories',
+		retrieveAllMemories
+	)
 
 	if (isLoading) {
 		return <Box>LOADING...</Box>
 	}
 
-	if (!posts || posts.length === 0) {
+	if (!memories || memories.length === 0) {
 		return <Box>EMPTY</Box>
 	}
 
 	return (
 		<MainLayout>
 			<Heading as="h1" pb={2} variant="gradient">
-				Tus momentos
+				Mis recuerdos
 			</Heading>
 			<VStack>
-				{posts.map((post) => (
-					<Card key={post.id} width="full">
+				{memories.map((memory) => (
+					<Card key={memory.id} width="full">
 						<CardHeader>
 							<Text fontWeight="bold">
-								<Link href={`/momento/${post.id}`}>{post.title}</Link>
+								<Link href={`/recuerdo/${memory.id}`}>{memory.title}</Link>
 							</Text>
 						</CardHeader>
 						<CardBody>
-							<Text>Happened at: {String(new Date(post.happenedAt))}</Text>
+							<Text>Happened at: {String(new Date(memory.happenedAt))}</Text>
 							<Image
-								src={getStoragePublicUrl(post.pictureName)}
-								alt={post.title}
+								src={getPicturePublicUrl(memory.pictureName)}
+								alt={memory.title}
 								boxSize="150px"
 								objectFit="cover"
 							/>
