@@ -44,10 +44,9 @@ const CreateMemoryPage = () => {
 		<>
 			<NextSeo title="Crear recuerdo" />
 			<MainLayout>
+				<Heading variant="main">Crea un nuevo recuerdo</Heading>
 				<form onSubmit={handleCreateMemory}>
 					<VStack gap={4} alignItems="start">
-						<Heading>Crea un nuevo recuerdo</Heading>
-
 						<FormControl isRequired>
 							<FormLabel>Foto</FormLabel>
 							<Input name="picture" type="file" accept="image/*" />

@@ -68,8 +68,10 @@ const themeExtensions = {
 	components: {
 		Heading: {
 			variants: {
-				gradient: (props: Dict) => {
+				main: (props: Dict) => {
 					return {
+						as: 'h1',
+						pb: { base: 2, md: 6 },
 						fontWeight: 'black',
 						bgGradient: mode(
 							'linear(to-br, primary.400, primary.700)',

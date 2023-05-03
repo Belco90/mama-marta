@@ -4,6 +4,7 @@ import {
 	CardBody,
 	CardFooter,
 	CardHeader,
+	Heading,
 	HStack,
 	IconButton,
 	Image,
@@ -60,6 +61,7 @@ const DetailsMemoryPage = () => {
 		<>
 			<NextSeo title="Ver recuerdo" />
 			<MainLayout>
+				<Heading variant="main">Un recuerdo...</Heading>
 				<HStack justifyContent="end">
 					<IconButton
 						aria-label="Borrar este recuerdo"

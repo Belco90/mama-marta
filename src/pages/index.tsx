@@ -31,9 +31,7 @@ const HomePage = () => {
 
 	return (
 		<MainLayout>
-			<Heading as="h1" pb={2} variant="gradient">
-				Mis recuerdos
-			</Heading>
+			<Heading variant="main">Mis recuerdos</Heading>
 			<VStack>
 				{memories.map((memory) => (
 					<Card key={memory.id} width="full">

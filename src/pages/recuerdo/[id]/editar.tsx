@@ -69,10 +69,9 @@ const EditMemoryPage = () => {
 		<>
 			<NextSeo title="Editar recuerdo" />
 			<MainLayout>
+				<Heading variant="main">Editar un recuerdo existente</Heading>
 				<form onSubmit={handleEditMemory}>
 					<VStack gap={4} alignItems="start">
-						<Heading>Editar un recuerdo existente</Heading>
-
 						<FormControl>
 							<FormLabel>Foto</FormLabel>
 							<Image
