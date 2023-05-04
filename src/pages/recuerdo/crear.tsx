@@ -3,6 +3,7 @@ import {
 	FormControl,
 	FormLabel,
 	Heading,
+	Image,
 	Input,
 	Textarea,
 	useToast,
@@ -10,13 +11,44 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { NextSeo } from 'next-seo'
-import { type FormEvent } from 'react'
+import { type ChangeEvent, type FormEvent, useRef, useState } from 'react'
+import { HiTrash } from 'react-icons/hi2'
 
 import { createMemory } from '~/lib/supabase-queries'
 
 const CreateMemoryPage = () => {
 	const router = useRouter()
 	const toast = useToast()
+	const previewImgRef = useRef<HTMLImageElement | null>(null)
+	const previewFileRef = useRef<HTMLInputElement>(null)
+	const [previewImgFile, setPreviewImgFile] = useState<File | null>(null)
+	const [pictureMeta, setPictureMeta] = useState<{
+		width: number
+		height: number
+	} | null>(null)
+
+	const handlePreviewImgLoad = () => {
+		setPictureMeta({
+			width: previewImgRef.current?.width ?? 0,
+			height: previewImgRef.current?.height ?? 0,
+		})
+	}
+
+	const handleInputFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const files = event.currentTarget.files
+		if (files && files.length > 0) {
+			setPreviewImgFile(files[0])
+		}
+	}
+
+	const handleClearFile = () => {
+		setPreviewImgFile(null)
+		setPictureMeta(null)
+		if (previewFileRef.current) {
+			previewFileRef.current.value = ''
+		}
+	}
+
 	const handleCreateMemory = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
@@ -29,7 +61,7 @@ const CreateMemoryPage = () => {
 		}
 		memoryData.description ||= null
 
-		await createMemory(memoryData)
+		await createMemory({ ...memoryData, pictureMeta })
 
 		toast({
 			title: 'Nuevo recuerdo creado correctamente',
@@ -39,6 +71,8 @@ const CreateMemoryPage = () => {
 		router.push('/')
 	}
 
+	const previewImgSrc = previewImgFile && URL.createObjectURL(previewImgFile)
+
 	return (
 		<>
 			<NextSeo title="Crear recuerdo" />
@@ -47,7 +81,28 @@ const CreateMemoryPage = () => {
 				<VStack gap={4} alignItems="start">
 					<FormControl isRequired>
 						<FormLabel>Foto</FormLabel>
-						<Input name="picture" type="file" accept="image/*" />
+						{!!previewImgSrc && (
+							<VStack alignItems="start">
+								<Image
+									src={previewImgSrc}
+									alt="Vista previa de la foto seleccionada"
+									ref={previewImgRef}
+									onLoad={handlePreviewImgLoad}
+								/>
+								<Button color="red" variant="link" onClick={handleClearFile}>
+									<HiTrash />
+									Eliminar foto
+								</Button>
+							</VStack>
+						)}
+						<Input
+							display={previewImgSrc ? 'none' : undefined}
+							name="picture"
+							type="file"
+							accept="image/*"
+							onChange={handleInputFileChange}
+							ref={previewFileRef}
+						/>
 					</FormControl>
 
 					<FormControl isRequired>

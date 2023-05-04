@@ -96,7 +96,7 @@ type Memory = NonNullable<AllMemoriesResponse>[number]
 type RequestMemoryParamId = string
 type RequestFormParams = Pick<
 	Memory,
-	'title' | 'description' | 'happenedAt'
+	'title' | 'description' | 'happenedAt' | 'pictureMeta'
 > & {
 	picture: File
 }
