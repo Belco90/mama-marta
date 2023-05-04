@@ -64,7 +64,7 @@ async function createMemory(formData: RequestFormParams) {
 }
 async function updateMemory(
 	id: RequestMemoryParamId,
-	formData: Omit<RequestFormParams, 'picture'>
+	formData: Omit<RequestFormParams, 'picture' | 'pictureMeta'>
 ) {
 	// TODO: make sure dates are in the correct format
 
