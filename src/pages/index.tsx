@@ -8,9 +8,9 @@ import {
 	Text,
 	VStack,
 } from '@chakra-ui/react'
-import Link from 'next/link'
 import useSWR from 'swr'
 
+import RouteLink from '~/components/RouteLink'
 import { retrieveAllMemories } from '~/lib/supabase-queries'
 import { getPicturePublicUrl } from '~/lib/utils'
 
@@ -36,7 +36,9 @@ const HomePage = () => {
 					<Card key={memory.id} width="full">
 						<CardHeader>
 							<Text fontWeight="bold">
-								<Link href={`/recuerdo/${memory.id}`}>{memory.title}</Link>
+								<RouteLink href={`/recuerdo/${memory.id}`}>
+									{memory.title}
+								</RouteLink>
 							</Text>
 						</CardHeader>
 						<CardBody>

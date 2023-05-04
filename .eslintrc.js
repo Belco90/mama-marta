@@ -16,7 +16,11 @@ module.exports = {
 			{
 				name: '@supabase/auth-helpers-react',
 				importNames: ['useSupabaseClient'],
-				message: 'Please import from `hooks/useSupabaseClient` instead.',
+				message: 'Please import from `~/hooks/useSupabaseClient` instead.',
+			},
+			{
+				name: 'next/link',
+				message: 'Please import from `~/components/RouteLink` instead.',
 			},
 		],
 

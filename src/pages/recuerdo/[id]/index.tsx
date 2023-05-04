@@ -12,13 +12,13 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { HiTrash } from 'react-icons/hi'
 import useSWR from 'swr'
 
 import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
+import RouteLink from '~/components/RouteLink'
 import { deleteMemory, retrieveMemory } from '~/lib/supabase-queries'
 import { getPicturePublicUrl } from '~/lib/utils'
 
@@ -68,7 +68,7 @@ const DetailsMemoryPage = () => {
 						colorScheme="red"
 						onClick={onDeleteModalOpen}
 					/>
-					<Link href={`/recuerdo/${memory.id}/editar`}>Editar</Link>
+					<RouteLink href={`/recuerdo/${memory.id}/editar`}>Editar</RouteLink>
 				</HStack>
 				<Card key={memory.id}>
 					<CardHeader>

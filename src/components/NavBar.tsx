@@ -11,11 +11,11 @@ import {
 	Text,
 } from '@chakra-ui/react'
 import { useSession } from '@supabase/auth-helpers-react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { HiOutlineHome, HiPlus, HiPower } from 'react-icons/hi2'
+import { HiOutlineHome, HiPlus, HiOutlinePower } from 'react-icons/hi2'
 
+import RouteLink from '~/components/RouteLink'
 import { useSupabaseClient } from '~/hooks/useSupabaseClient'
 import { LOGIN_URL } from '~/lib/utils'
 
@@ -42,14 +42,14 @@ const NavBar = () => {
 						bgPosition="0 80%"
 						bgRepeat="no-repeat"
 					>
-						<Link href="/">
+						<RouteLink href="/">
 							<Text as="span" color="secondary.700">
 								Mama Marta
 							</Text>{' '}
 							<span role="img" aria-label="Corazón naranja">
 								🧡
 							</span>
-						</Link>
+						</RouteLink>
 					</Box>
 					<Spacer />
 
@@ -61,18 +61,18 @@ const NavBar = () => {
 							variant="outline"
 						/>
 						<MenuList>
-							<Link href="/" legacyBehavior passHref>
+							<RouteLink href="/" legacyBehavior passHref>
 								<MenuItem icon={<HiOutlineHome />} as="a">
 									Inicio
 								</MenuItem>
-							</Link>
-							<Link href="/recuerdo/crear" legacyBehavior passHref>
+							</RouteLink>
+							<RouteLink href="/recuerdo/crear" legacyBehavior passHref>
 								<MenuItem icon={<HiPlus />} as="a">
 									Crear recuerdo
 								</MenuItem>
-							</Link>
+							</RouteLink>
 							{!!session && (
-								<MenuItem icon={<HiPower />} onClick={handleLogout}>
+								<MenuItem icon={<HiOutlinePower />} onClick={handleLogout}>
 									Cerrar sesión
 								</MenuItem>
 							)}

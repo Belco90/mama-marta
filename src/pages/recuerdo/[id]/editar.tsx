@@ -9,15 +9,14 @@ import {
 	Input,
 	Textarea,
 	useToast,
-	Link,
 	VStack,
 } from '@chakra-ui/react'
-import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { type FormEvent } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
+import RouteLink from '~/components/RouteLink'
 import { retrieveMemory, updateMemory } from '~/lib/supabase-queries'
 import { getPicturePublicUrl } from '~/lib/utils'
 
@@ -81,13 +80,12 @@ const EditMemoryPage = () => {
 						/>
 						<FormHelperText>
 							La foto no puede ser editada.{' '}
-							<Link
-								as={NextLink}
+							<RouteLink
 								href={`/recuerdo/${memory.id}`}
 								textDecoration="underline"
 							>
 								Elimina este recuerdo
-							</Link>{' '}
+							</RouteLink>{' '}
 							y crea uno nuevo si quieres cambiarla.
 						</FormHelperText>
 					</FormControl>
