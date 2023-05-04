@@ -1,8 +1,10 @@
+import { supabase } from '~/lib/supabase-client'
+
 const LOGIN_URL = '/acceso'
 
 function getPicturePublicUrl(filePath: string): string {
-	const dbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? 'unknown'
-	return `${dbUrl}/storage/v1/object/public/picture/${filePath}`
+	const { data } = supabase.storage.from('picture').getPublicUrl(filePath)
+	return data.publicUrl
 }
 
 export { LOGIN_URL, getPicturePublicUrl }
