@@ -58,9 +58,9 @@ const DetailsMemoryPage = () => {
 
 	return (
 		<>
-			<NextSeo title="Ver recuerdo" />
+			<NextSeo title={memory.title} />
 			<>
-				<Heading variant="main">Un recuerdo...</Heading>
+				<Heading variant="main">{memory.title}</Heading>
 				<HStack justifyContent="end">
 					<IconButton
 						aria-label="Borrar este recuerdo"
