@@ -1,3 +1,4 @@
+import { Image } from '@chakra-ui/next-js'
 import {
 	Box,
 	Button,
@@ -5,7 +6,6 @@ import {
 	FormHelperText,
 	FormLabel,
 	Heading,
-	Image,
 	Input,
 	Textarea,
 	useToast,
@@ -75,8 +75,8 @@ const EditMemoryPage = () => {
 						<Image
 							src={getPicturePublicUrl(memory.pictureName)}
 							alt={memory.title}
-							boxSize="150px"
-							objectFit="cover"
+							width={memory.pictureMeta.width}
+							height={memory.pictureMeta.height}
 						/>
 						<FormHelperText>
 							La foto no puede ser editada.{' '}

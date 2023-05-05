@@ -6,6 +6,8 @@ export type Json =
 	| { [key: string]: Json }
 	| Json[]
 
+export type PictureMeta = { width: number; height: number }
+
 export interface Database {
 	public: {
 		Tables: {
@@ -15,7 +17,7 @@ export interface Database {
 					description: string | null
 					happenedAt: string
 					id: number
-					pictureMeta: Json
+					pictureMeta: PictureMeta
 					pictureName: string
 					title: string
 				}
@@ -24,7 +26,7 @@ export interface Database {
 					description?: string | null
 					happenedAt: string
 					id?: number
-					pictureMeta: Json
+					pictureMeta: PictureMeta
 					pictureName: string
 					title: string
 				}
@@ -33,7 +35,7 @@ export interface Database {
 					description?: string | null
 					happenedAt?: string
 					id?: number
-					pictureMeta?: Json
+					pictureMeta?: PictureMeta
 					pictureName?: string
 					title?: string
 				}

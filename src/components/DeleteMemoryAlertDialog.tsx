@@ -1,3 +1,4 @@
+import { Image } from '@chakra-ui/next-js'
 import {
 	AlertDialog,
 	AlertDialogBody,
@@ -6,7 +7,6 @@ import {
 	AlertDialogHeader,
 	AlertDialogOverlay,
 	Button,
-	Image,
 	Text,
 } from '@chakra-ui/react'
 import { useRef } from 'react'
@@ -42,7 +42,8 @@ const DeleteMemoryAlertDialog = ({
 						<Image
 							src={getPicturePublicUrl(memory.pictureName)}
 							alt={memory.title}
-							boxSize="150px"
+							width={memory.pictureMeta.width}
+							height={memory.pictureMeta.height}
 							objectFit="cover"
 							mx="auto"
 						/>

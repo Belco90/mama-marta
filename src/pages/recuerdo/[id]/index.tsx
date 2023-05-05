@@ -1,3 +1,4 @@
+import { Image } from '@chakra-ui/next-js'
 import {
 	Box,
 	Card,
@@ -7,7 +8,6 @@ import {
 	Heading,
 	HStack,
 	IconButton,
-	Image,
 	Text,
 	useDisclosure,
 	useToast,
@@ -79,8 +79,8 @@ const DetailsMemoryPage = () => {
 						<Image
 							src={getPicturePublicUrl(memory.pictureName)}
 							alt={memory.title}
-							boxSize="150px"
-							objectFit="cover"
+							width={memory.pictureMeta.width}
+							height={memory.pictureMeta.height}
 						/>
 					</CardBody>
 					{!!memory.description && (

@@ -1,10 +1,10 @@
+import { Image } from '@chakra-ui/next-js'
 import {
 	Box,
 	Card,
 	CardBody,
 	CardHeader,
 	Heading,
-	Image,
 	Text,
 	VStack,
 } from '@chakra-ui/react'
@@ -32,26 +32,28 @@ const HomePage = () => {
 		<>
 			<Heading variant="main">Mis recuerdos</Heading>
 			<VStack>
-				{memories.map((memory) => (
-					<Card key={memory.id} width="full">
-						<CardHeader>
-							<Text fontWeight="bold">
-								<RouteLink href={`/recuerdo/${memory.id}`}>
-									{memory.title}
-								</RouteLink>
-							</Text>
-						</CardHeader>
-						<CardBody>
-							<Text>Happened at: {String(new Date(memory.happenedAt))}</Text>
-							<Image
-								src={getPicturePublicUrl(memory.pictureName)}
-								alt={memory.title}
-								boxSize="150px"
-								objectFit="cover"
-							/>
-						</CardBody>
-					</Card>
-				))}
+				{memories.map((memory) => {
+					return (
+						<Card key={memory.id} width="full">
+							<CardHeader>
+								<Text fontWeight="bold">
+									<RouteLink href={`/recuerdo/${memory.id}`}>
+										{memory.title}
+									</RouteLink>
+								</Text>
+							</CardHeader>
+							<CardBody>
+								<Text>Happened at: {String(new Date(memory.happenedAt))}</Text>
+								<Image
+									src={getPicturePublicUrl(memory.pictureName)}
+									alt={memory.title}
+									width={memory.pictureMeta.width}
+									height={memory.pictureMeta.height}
+								/>
+							</CardBody>
+						</Card>
+					)
+				})}
 			</VStack>
 		</>
 	)

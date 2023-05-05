@@ -14,7 +14,10 @@ import { NextSeo } from 'next-seo'
 import { type ChangeEvent, type FormEvent, useRef, useState } from 'react'
 import { HiTrash } from 'react-icons/hi2'
 
+import { type PictureMeta } from '~/lib/database.types'
 import { createMemory } from '~/lib/supabase-queries'
+
+const DEFAULT_PICTURE_META: PictureMeta = { width: 0, height: 0 }
 
 const CreateMemoryPage = () => {
 	const router = useRouter()
@@ -22,10 +25,7 @@ const CreateMemoryPage = () => {
 	const previewImgRef = useRef<HTMLImageElement | null>(null)
 	const previewFileRef = useRef<HTMLInputElement>(null)
 	const [previewImgFile, setPreviewImgFile] = useState<File | null>(null)
-	const [pictureMeta, setPictureMeta] = useState<{
-		width: number
-		height: number
-	} | null>(null)
+	const [pictureMeta, setPictureMeta] = useState<PictureMeta | null>(null)
 
 	const handlePreviewImgLoad = () => {
 		setPictureMeta({
@@ -61,7 +61,10 @@ const CreateMemoryPage = () => {
 		}
 		memoryData.description ||= null
 
-		await createMemory({ ...memoryData, pictureMeta })
+		await createMemory({
+			...memoryData,
+			pictureMeta: pictureMeta || DEFAULT_PICTURE_META,
+		})
 
 		toast({
 			title: 'Nuevo recuerdo creado correctamente',
