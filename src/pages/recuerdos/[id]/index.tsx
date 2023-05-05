@@ -3,8 +3,8 @@ import {
 	Box,
 	Card,
 	CardBody,
-	CardFooter,
 	CardHeader,
+	Center,
 	Heading,
 	HStack,
 	IconButton,
@@ -12,6 +12,7 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react'
+import { Caveat } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { HiTrash } from 'react-icons/hi'
@@ -21,6 +22,8 @@ import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
 import RouteLink from '~/components/RouteLink'
 import { deleteMemory, retrieveMemory } from '~/lib/supabase-queries'
 import { getPicturePublicUrl, HOME_URL } from '~/lib/utils'
+
+const caveatFont = Caveat({ subsets: ['latin'] })
 
 const DetailsMemoryPage = () => {
 	const router = useRouter()
@@ -60,8 +63,36 @@ const DetailsMemoryPage = () => {
 		<>
 			<NextSeo title={memory.title} />
 			<>
-				<Heading variant="main">{memory.title}</Heading>
-				<HStack justifyContent="end">
+				<Heading variant="main">Un recuerdo...</Heading>
+				<Card
+					key={memory.id}
+					p={{ base: 1, md: 4 }}
+					className={caveatFont.className}
+					shadow="dark-lg"
+				>
+					<CardBody>
+						<Image
+							src={getPicturePublicUrl(memory.pictureName)}
+							alt={memory.title}
+							width={memory.pictureMeta.width}
+							height={memory.pictureMeta.height}
+							objectFit="cover"
+						/>
+					</CardBody>
+					<CardHeader>
+						<Center>
+							<Text as="h2" fontWeight="bold" fontSize="32" mb={8}>
+								<Text as="u">{memory.title}</Text>
+							</Text>
+						</Center>
+						<Text fontSize={24} as="cite">
+							{String(new Date(memory.happenedAt))}
+							{!!memory.description && ` - ${memory.description}`}
+						</Text>
+					</CardHeader>
+				</Card>
+
+				<HStack pt={8}>
 					<IconButton
 						aria-label="Borrar este recuerdo"
 						icon={<HiTrash />}
@@ -70,23 +101,6 @@ const DetailsMemoryPage = () => {
 					/>
 					<RouteLink href={`/recuerdos/${memory.id}/editar`}>Editar</RouteLink>
 				</HStack>
-				<Card key={memory.id}>
-					<CardHeader>
-						<Text fontWeight="bold">{memory.title}</Text>
-					</CardHeader>
-					<CardBody>
-						<Text>{String(new Date(memory.happenedAt))}</Text>
-						<Image
-							src={getPicturePublicUrl(memory.pictureName)}
-							alt={memory.title}
-							width={memory.pictureMeta.width}
-							height={memory.pictureMeta.height}
-						/>
-					</CardBody>
-					{!!memory.description && (
-						<CardFooter>{memory.description}</CardFooter>
-					)}
-				</Card>
 
 				{isDeleteModalOpen && (
 					<DeleteMemoryAlertDialog
