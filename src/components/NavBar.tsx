@@ -13,11 +13,11 @@ import {
 import { useSession } from '@supabase/auth-helpers-react'
 import { useRouter } from 'next/router'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { HiOutlineHome, HiPlus, HiOutlinePower } from 'react-icons/hi2'
+import { HiOutlinePower, HiPlus } from 'react-icons/hi2'
 
 import RouteLink from '~/components/RouteLink'
 import { useSupabaseClient } from '~/hooks/useSupabaseClient'
-import { LOGIN_URL } from '~/lib/utils'
+import { HOME_URL, LOGIN_URL } from '~/lib/utils'
 
 const NavBar = () => {
 	const router = useRouter()
@@ -42,7 +42,7 @@ const NavBar = () => {
 						bgPosition="0 80%"
 						bgRepeat="no-repeat"
 					>
-						<RouteLink href="/">
+						<RouteLink href={HOME_URL}>
 							<Text as="span" color="secondary.700">
 								Mama Marta
 							</Text>{' '}
@@ -58,14 +58,11 @@ const NavBar = () => {
 							as={IconButton}
 							aria-label="Opciones"
 							icon={<GiHamburgerMenu />}
-							variant="outline"
+							variant="link"
+							colorScheme="secondary"
+							fontSize={{ base: 16, md: 20 }}
 						/>
 						<MenuList>
-							<RouteLink href="/" legacyBehavior passHref>
-								<MenuItem icon={<HiOutlineHome />} as="a">
-									Inicio
-								</MenuItem>
-							</RouteLink>
 							<RouteLink href="/recuerdos/crear" legacyBehavior passHref>
 								<MenuItem icon={<HiPlus />} as="a">
 									Crear recuerdo

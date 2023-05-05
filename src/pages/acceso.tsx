@@ -35,7 +35,6 @@ const LoginPage = () => {
 		<Container maxWidth="container.sm">
 			<Auth
 				supabaseClient={supabase}
-				redirectTo="/"
 				appearance={{ theme: ThemeSupa }}
 				providers={[]}
 				showLinks={false}

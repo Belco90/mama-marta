@@ -29,7 +29,7 @@ const MemoryGridItem = ({ memory }: MemoryGridItemProps) => {
 					py={1}
 				>
 					<Text
-						textColor="accent.400"
+						textColor="white"
 						fontSize={{ base: '2xs', md: 'md' }}
 						noOfLines={1}
 						textShadow="0 1px 2px rgba(0, 0, 0, 0.6), 0 0 2px rgba(0, 0, 0, 0.3)"
