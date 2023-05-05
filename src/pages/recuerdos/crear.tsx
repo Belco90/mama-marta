@@ -27,6 +27,7 @@ const CreateMemoryPage = () => {
 	const previewFileRef = useRef<HTMLInputElement>(null)
 	const [previewImgFile, setPreviewImgFile] = useState<File | null>(null)
 	const [pictureMeta, setPictureMeta] = useState<PictureMeta | null>(null)
+	const [isLoading, setIsLoading] = useState(false)
 
 	const handlePreviewImgLoad = () => {
 		setPictureMeta({
@@ -52,6 +53,7 @@ const CreateMemoryPage = () => {
 
 	const handleCreateMemory = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
+		setIsLoading(true)
 
 		const formData = new FormData(event.currentTarget)
 		const memoryData = Object.fromEntries(formData) as {
@@ -73,6 +75,7 @@ const CreateMemoryPage = () => {
 			isClosable: true,
 		})
 		router.push(HOME_URL)
+		setIsLoading(false)
 	}
 
 	const previewImgSrc = previewImgFile && URL.createObjectURL(previewImgFile)
@@ -123,7 +126,9 @@ const CreateMemoryPage = () => {
 						<FormLabel>Descripción</FormLabel>
 						<Textarea name="description" />
 					</FormControl>
-					<Button type="submit">Crear</Button>
+					<Button type="submit" isLoading={isLoading} loadingText="Cargando...">
+						Crear
+					</Button>
 				</VStack>
 			</form>
 		</>
