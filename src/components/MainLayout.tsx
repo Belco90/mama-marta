@@ -12,7 +12,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => {
 	return (
 		<Flex height="full" direction="column">
 			<NavBar />
-			<Box as="main" flex="1 0 auto" pt={6} pb={8} bgColor="accent.50">
+			<Box as="main" flex="1 0 auto" pt={6} pb={8}>
 				<Container maxWidth="container.lg">{children}</Container>
 			</Box>
 			<Footer />
