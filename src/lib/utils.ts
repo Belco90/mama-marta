@@ -1,5 +1,6 @@
 import { supabase } from '~/lib/supabase-client'
 
+const HOME_URL = '/recuerdos'
 const LOGIN_URL = '/acceso'
 
 function getPicturePublicUrl(filePath: string): string {
@@ -7,4 +8,4 @@ function getPicturePublicUrl(filePath: string): string {
 	return data.publicUrl
 }
 
-export { LOGIN_URL, getPicturePublicUrl }
+export { HOME_URL, LOGIN_URL, getPicturePublicUrl }

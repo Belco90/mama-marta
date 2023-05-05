@@ -37,7 +37,7 @@ const HomePage = () => {
 						<Card key={memory.id} width="full">
 							<CardHeader>
 								<Text fontWeight="bold">
-									<RouteLink href={`/recuerdo/${memory.id}`}>
+									<RouteLink href={`/recuerdos/${memory.id}`}>
 										{memory.title}
 									</RouteLink>
 								</Text>

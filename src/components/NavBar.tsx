@@ -66,7 +66,7 @@ const NavBar = () => {
 									Inicio
 								</MenuItem>
 							</RouteLink>
-							<RouteLink href="/recuerdo/crear" legacyBehavior passHref>
+							<RouteLink href="/recuerdos/crear" legacyBehavior passHref>
 								<MenuItem icon={<HiPlus />} as="a">
 									Crear recuerdo
 								</MenuItem>

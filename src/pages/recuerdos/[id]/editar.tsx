@@ -53,7 +53,7 @@ const EditMemoryPage = () => {
 			status: 'success',
 			isClosable: true,
 		})
-		void router.push(`/recuerdo/${id}`)
+		void router.push(`/recuerdos/${id}`)
 	}
 
 	if (isLoading) {
@@ -81,7 +81,7 @@ const EditMemoryPage = () => {
 						<FormHelperText>
 							La foto no puede ser editada.{' '}
 							<RouteLink
-								href={`/recuerdo/${memory.id}`}
+								href={`/recuerdos/${memory.id}`}
 								textDecoration="underline"
 							>
 								Elimina este recuerdo

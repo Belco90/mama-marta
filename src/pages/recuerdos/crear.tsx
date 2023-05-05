@@ -16,6 +16,7 @@ import { HiTrash } from 'react-icons/hi2'
 
 import { type PictureMeta } from '~/lib/database.types'
 import { createMemory } from '~/lib/supabase-queries'
+import { HOME_URL } from '~/lib/utils'
 
 const DEFAULT_PICTURE_META: PictureMeta = { width: 0, height: 0 }
 
@@ -71,7 +72,7 @@ const CreateMemoryPage = () => {
 			status: 'success',
 			isClosable: true,
 		})
-		router.push('/')
+		router.push(HOME_URL)
 	}
 
 	const previewImgSrc = previewImgFile && URL.createObjectURL(previewImgFile)

@@ -20,7 +20,7 @@ import useSWR from 'swr'
 import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
 import RouteLink from '~/components/RouteLink'
 import { deleteMemory, retrieveMemory } from '~/lib/supabase-queries'
-import { getPicturePublicUrl } from '~/lib/utils'
+import { getPicturePublicUrl, HOME_URL } from '~/lib/utils'
 
 const DetailsMemoryPage = () => {
 	const router = useRouter()
@@ -41,7 +41,7 @@ const DetailsMemoryPage = () => {
 			isClosable: true,
 		})
 		onDeleteModalClose()
-		void router.push('/')
+		void router.push(HOME_URL)
 	}
 	const { data: memory, isLoading } = useSWR(
 		['memory', id],
@@ -68,7 +68,7 @@ const DetailsMemoryPage = () => {
 						colorScheme="red"
 						onClick={onDeleteModalOpen}
 					/>
-					<RouteLink href={`/recuerdo/${memory.id}/editar`}>Editar</RouteLink>
+					<RouteLink href={`/recuerdos/${memory.id}/editar`}>Editar</RouteLink>
 				</HStack>
 				<Card key={memory.id}>
 					<CardHeader>

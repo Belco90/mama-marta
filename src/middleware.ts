@@ -1,7 +1,7 @@
 import { createMiddlewareSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { type NextRequest, NextResponse } from 'next/server'
 
-import { LOGIN_URL } from '~/lib/utils'
+import { HOME_URL, LOGIN_URL } from '~/lib/utils'
 
 export async function middleware(req: NextRequest) {
 	const res = NextResponse.next()
@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
 
 	if (isUserAuth) {
 		if (isLoginUrl) {
-			return NextResponse.redirect(new URL('/', req.url))
+			return NextResponse.redirect(new URL(HOME_URL, req.url))
 		}
 		return res
 	}
@@ -27,5 +27,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/((?!acceso|!api|_next/static|_next/image|favicon.ico).*)'],
+	matcher: '/recuerdos/:path*',
 }

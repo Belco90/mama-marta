@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { type ComponentProps } from 'react'
 
 import { useSupabaseClient } from '~/hooks/useSupabaseClient'
+import { HOME_URL } from '~/lib/utils'
 
 const ES_LOCALIZATION: NonNullable<
 	ComponentProps<typeof Auth>['localization']
@@ -26,7 +27,7 @@ const LoginPage = () => {
 	const router = useRouter()
 
 	if (session) {
-		void router.replace('/')
+		void router.push(HOME_URL)
 		return <div>REDIRECTING</div>
 	}
 
