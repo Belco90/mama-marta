@@ -4,8 +4,6 @@ import {
 	type Theme,
 	withDefaultColorScheme,
 } from '@chakra-ui/react'
-import { mode } from '@chakra-ui/theme-tools'
-import { type Dict } from '@chakra-ui/utils'
 
 type ExtendedTheme = Theme & {
 	colors: { primary: ColorHues; secondary: ColorHues; accent: ColorHues }
@@ -68,17 +66,11 @@ const themeExtensions = {
 	components: {
 		Heading: {
 			variants: {
-				main: (props: Dict) => {
-					return {
-						as: 'h1',
-						pb: { base: 2, md: 6 },
-						fontWeight: 'black',
-						bgGradient: mode(
-							'linear(to-br, primary.400, primary.700)',
-							'linear(to-br, primary.200, primary.400)'
-						)(props),
-						bgClip: 'text',
-					}
+				main: {
+					as: 'h1',
+					pb: { base: 2, md: 6 },
+					fontWeight: 'black',
+					textColor: 'primary.500',
 				},
 			},
 		},
