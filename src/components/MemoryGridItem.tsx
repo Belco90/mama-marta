@@ -1,8 +1,8 @@
-import { Box, Image, Text } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 
+import PictureImage from '~/components/PictureImage'
 import RouteLink from '~/components/RouteLink'
 import { type Memory } from '~/lib/supabase-queries'
-import { getPicturePublicUrl } from '~/lib/utils'
 
 interface MemoryGridItemProps {
 	memory: Memory
@@ -12,13 +12,7 @@ const MemoryGridItem = ({ memory }: MemoryGridItemProps) => {
 	return (
 		<RouteLink href={`/recuerdos/${memory.id}`}>
 			<Box as="figure" position="relative" width="full" height="full">
-				<Image
-					src={getPicturePublicUrl(memory.pictureName)}
-					alt={memory.title}
-					width="full"
-					height="full"
-					objectFit="cover"
-				/>
+				<PictureImage memory={memory} />
 				<Box
 					as="figcaption"
 					position="absolute"

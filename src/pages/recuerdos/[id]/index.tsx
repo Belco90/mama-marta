@@ -7,7 +7,6 @@ import {
 	Center,
 	Heading,
 	HStack,
-	Image,
 	Stack,
 	Text,
 	useDisclosure,
@@ -19,9 +18,10 @@ import { HiTrash } from 'react-icons/hi'
 import useSWR from 'swr'
 
 import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
+import PictureImage from '~/components/PictureImage'
 import RouteLink from '~/components/RouteLink'
 import { deleteMemory, retrieveMemory } from '~/lib/supabase-queries'
-import { getPicturePublicUrl, HOME_URL } from '~/lib/utils'
+import { HOME_URL } from '~/lib/utils'
 
 const DetailsMemoryPage = () => {
 	const router = useRouter()
@@ -78,13 +78,7 @@ const DetailsMemoryPage = () => {
 							overflow="hidden"
 							p={{ base: 3, md: 4 }}
 						>
-							<Image
-								src={getPicturePublicUrl(memory.pictureName)}
-								alt={memory.title}
-								width="100%"
-								height="100%"
-								objectFit="cover"
-							/>
+							<PictureImage memory={memory} />
 						</CardBody>
 						<CardHeader>
 							<Center>
