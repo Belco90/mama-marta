@@ -4,7 +4,7 @@ import {
 	SessionContextProvider,
 } from '@supabase/auth-helpers-react'
 import { type AppProps } from 'next/app'
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Caveat, Inter } from 'next/font/google'
 import { DefaultSeo, type DefaultSeoProps } from 'next-seo'
 import { useState } from 'react'
 
@@ -23,13 +23,8 @@ const DEFAULT_SEO: DefaultSeoProps = {
 	},
 }
 
-const interFont = Inter({
-	subsets: ['latin'],
-})
-
-const robotoMonoFont = Roboto_Mono({
-	subsets: ['latin'],
-})
+const interFont = Inter({ subsets: ['latin'] })
+const caveatFont = Caveat({ subsets: ['latin'] })
 
 function MyApp({
 	Component,
@@ -42,7 +37,7 @@ function MyApp({
 			<style jsx global>{`
 				:root {
 					--font-inter: ${interFont.style.fontFamily};
-					--font-roboto-mono: ${robotoMonoFont.style.fontFamily};
+					--font-caveat: ${caveatFont.style.fontFamily};
 				}
 			`}</style>
 			<DefaultSeo {...DEFAULT_SEO} />

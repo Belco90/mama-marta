@@ -61,7 +61,7 @@ const themeExtensions = {
 	fonts: {
 		heading: 'var(--font-inter)',
 		body: 'var(--font-inter)',
-		mono: 'var(--font-roboto-mono)',
+		hand: 'var(--font-caveat)',
 	},
 	components: {
 		Heading: {

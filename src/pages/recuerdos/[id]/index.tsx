@@ -13,7 +13,6 @@ import {
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react'
-import { Caveat } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { HiTrash } from 'react-icons/hi'
@@ -23,8 +22,6 @@ import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
 import RouteLink from '~/components/RouteLink'
 import { deleteMemory, retrieveMemory } from '~/lib/supabase-queries'
 import { getPicturePublicUrl, HOME_URL } from '~/lib/utils'
-
-const caveatFont = Caveat({ subsets: ['latin'] })
 
 const DetailsMemoryPage = () => {
 	const router = useRouter()
@@ -72,9 +69,9 @@ const DetailsMemoryPage = () => {
 				>
 					<Card
 						key={memory.id}
-						className={caveatFont.className}
 						shadow="dark-lg"
 						borderRadius="0"
+						fontFamily="hand"
 					>
 						<CardBody
 							aspectRatio="1/1"
