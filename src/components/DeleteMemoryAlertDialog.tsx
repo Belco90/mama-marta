@@ -1,18 +1,22 @@
-import { Image } from '@chakra-ui/next-js'
 import {
 	AlertDialog,
 	AlertDialogBody,
+	AlertDialogCloseButton,
 	AlertDialogContent,
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogOverlay,
 	Button,
+	Card,
+	CardBody,
+	CardHeader,
+	Center,
 	Text,
 } from '@chakra-ui/react'
 import { useRef } from 'react'
 
+import PictureImage from '~/components/PictureImage'
 import { type Memory } from '~/lib/supabase-queries'
-import { getPicturePublicUrl } from '~/lib/utils'
 
 interface DeleteMemoryAlertDialogProps {
 	memory: Memory
@@ -34,19 +38,33 @@ const DeleteMemoryAlertDialog = ({
 					<AlertDialogHeader fontSize="lg" fontWeight="bold">
 						Borrar recuerdo
 					</AlertDialogHeader>
+					<AlertDialogCloseButton />
 
 					<AlertDialogBody>
-						¿Estás seguro de que quieres borrar el recuerdo titulado
-						<Text as="em">&quot;{memory.title}&quot;</Text> para siempre? Esta
-						acción no se puede deshacer.
-						<Image
-							src={getPicturePublicUrl(memory.pictureName)}
-							alt={memory.title}
-							width={memory.pictureMeta.width}
-							height={memory.pictureMeta.height}
-							objectFit="cover"
-							mx="auto"
-						/>
+						¿Estás seguro de que quieres borrar este recuerdo para siempre? Esta
+						acción <Text as="strong">no se puede deshacer</Text>.
+						<Card
+							key={memory.id}
+							shadow="base"
+							borderRadius="0"
+							fontFamily="hand"
+							mt={4}
+						>
+							<CardBody
+								aspectRatio="1/1"
+								overflow="hidden"
+								p={{ base: 3, md: 4 }}
+							>
+								<PictureImage memory={memory} />
+							</CardBody>
+							<CardHeader pt={0}>
+								<Center>
+									<Text as="h2" fontWeight="bold" fontSize="2xl">
+										<Text as="u">{memory.title}</Text>
+									</Text>
+								</Center>
+							</CardHeader>
+						</Card>
 					</AlertDialogBody>
 
 					<AlertDialogFooter>
