@@ -16,6 +16,8 @@ import {
 	useToast,
 	VStack,
 } from '@chakra-ui/react'
+import { format } from 'date-fns'
+import { es } from 'date-fns/locale'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import { HiTrash, HiPencil } from 'react-icons/hi'
@@ -61,6 +63,10 @@ const DetailsMemoryPage = () => {
 		return <Box>No memory found for id &quot;{id}&quot;</Box>
 	}
 
+	const happenedAtFormatted = format(new Date(memory.happenedAt), 'PPPP', {
+		locale: es,
+	})
+
 	return (
 		<>
 			<NextSeo title={memory.title} />
@@ -94,7 +100,7 @@ const DetailsMemoryPage = () => {
 							</Button>
 						</HStack>
 					</Show>
-					<Show below="md">
+					<Show below="sm">
 						<HStack spacing={1}>
 							<RouteLink
 								href={`/recuerdos/${memory.id}/editar`}
@@ -150,10 +156,7 @@ const DetailsMemoryPage = () => {
 					</Card>
 
 					<VStack width="full" alignItems="end">
-						{/* TODO: format happenedAt */}
-						<Text>Martes, 14 de abril de 2023</Text>
-
-						{!!memory.description && (
+						{memory.description ? (
 							<Box
 								width={{ base: 'full', md: '80%' }}
 								shadow="2xl"
@@ -161,10 +164,15 @@ const DetailsMemoryPage = () => {
 							>
 								<Box
 									width="full"
-									height="30px"
 									bgColor="#333"
 									borderTopRadius="inherit"
-								/>
+									px={4}
+									py={1}
+									textColor="white"
+									textAlign="right"
+								>
+									<Text as="em">{happenedAtFormatted}</Text>
+								</Box>
 								<Text
 									fontFamily="hand"
 									fontSize="22px"
@@ -181,6 +189,8 @@ const DetailsMemoryPage = () => {
 									{memory.description}
 								</Text>
 							</Box>
+						) : (
+							<Text>{happenedAtFormatted}</Text>
 						)}
 					</VStack>
 				</Stack>
