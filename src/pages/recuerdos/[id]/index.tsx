@@ -1,13 +1,14 @@
-import { Image } from '@chakra-ui/next-js'
 import {
 	Box,
+	Button,
 	Card,
 	CardBody,
 	CardHeader,
 	Center,
 	Heading,
 	HStack,
-	IconButton,
+	Image,
+	Stack,
 	Text,
 	useDisclosure,
 	useToast,
@@ -64,43 +65,57 @@ const DetailsMemoryPage = () => {
 			<NextSeo title={memory.title} />
 			<>
 				<Heading variant="main">Un recuerdo...</Heading>
-				<Card
-					key={memory.id}
-					p={{ base: 1, md: 4 }}
-					className={caveatFont.className}
-					shadow="dark-lg"
+				<Stack
+					direction={{ base: 'column', md: 'row' }}
+					gap={{ base: 8, md: 60 }}
+					alignItems="start"
 				>
-					<CardBody>
-						<Image
-							src={getPicturePublicUrl(memory.pictureName)}
-							alt={memory.title}
-							width={memory.pictureMeta.width}
-							height={memory.pictureMeta.height}
-							objectFit="cover"
-						/>
-					</CardBody>
-					<CardHeader>
-						<Center>
-							<Text as="h2" fontWeight="bold" fontSize="32" mb={8}>
-								<Text as="u">{memory.title}</Text>
+					<Card
+						key={memory.id}
+						className={caveatFont.className}
+						shadow="dark-lg"
+						borderRadius="0"
+					>
+						<CardBody
+							aspectRatio="1/1"
+							overflow="hidden"
+							p={{ base: 3, md: 4 }}
+						>
+							<Image
+								src={getPicturePublicUrl(memory.pictureName)}
+								alt={memory.title}
+								width="100%"
+								height="100%"
+								objectFit="cover"
+							/>
+						</CardBody>
+						<CardHeader>
+							<Center>
+								<Text as="h2" fontWeight="bold" fontSize="32" mb={8}>
+									<Text as="u">{memory.title}</Text>
+								</Text>
+							</Center>
+							<Text fontSize={24} as="cite">
+								{String(new Date(memory.happenedAt))}
+								{!!memory.description && ` - ${memory.description}`}
 							</Text>
-						</Center>
-						<Text fontSize={24} as="cite">
-							{String(new Date(memory.happenedAt))}
-							{!!memory.description && ` - ${memory.description}`}
-						</Text>
-					</CardHeader>
-				</Card>
+						</CardHeader>
+					</Card>
 
-				<HStack pt={8}>
-					<IconButton
-						aria-label="Borrar este recuerdo"
-						icon={<HiTrash />}
-						colorScheme="red"
-						onClick={onDeleteModalOpen}
-					/>
-					<RouteLink href={`/recuerdos/${memory.id}/editar`}>Editar</RouteLink>
-				</HStack>
+					<HStack gap={4}>
+						<Button
+							colorScheme="red"
+							onClick={onDeleteModalOpen}
+							leftIcon={<HiTrash />}
+							variant="link"
+						>
+							Borrar
+						</Button>
+						<RouteLink href={`/recuerdos/${memory.id}/editar`}>
+							Editar
+						</RouteLink>
+					</HStack>
+				</Stack>
 
 				{isDeleteModalOpen && (
 					<DeleteMemoryAlertDialog
