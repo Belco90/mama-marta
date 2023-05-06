@@ -1,4 +1,3 @@
-import { Image } from '@chakra-ui/next-js'
 import {
 	Box,
 	Button,
@@ -13,18 +12,19 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
-import { type FormEvent } from 'react'
+import { type FormEvent, useState } from 'react'
 import useSWR, { useSWRConfig } from 'swr'
 
+import PictureImage from '~/components/PictureImage'
 import RouteLink from '~/components/RouteLink'
 import { retrieveMemory, updateMemory } from '~/lib/supabase-queries'
-import { getPicturePublicUrl } from '~/lib/utils'
 
 const EditMemoryPage = () => {
 	const router = useRouter()
 	const { id } = router.query as { id: string }
 	const toast = useToast()
 	const { mutate } = useSWRConfig()
+	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	const { data: memory, isLoading } = useSWR(
 		['memory', id],
@@ -33,6 +33,7 @@ const EditMemoryPage = () => {
 
 	const handleEditMemory = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
+		setIsSubmitting(true)
 
 		const formData = new FormData(event.currentTarget)
 		const memoryData = Object.fromEntries(formData) as {
@@ -54,6 +55,7 @@ const EditMemoryPage = () => {
 			isClosable: true,
 		})
 		void router.push(`/recuerdos/${id}`)
+		setIsSubmitting(false)
 	}
 
 	if (isLoading) {
@@ -67,17 +69,12 @@ const EditMemoryPage = () => {
 	return (
 		<>
 			<NextSeo title="Editar recuerdo" />
-			<Heading variant="main">Editar un recuerdo existente</Heading>
+			<Heading variant="main">Editar recuerdo</Heading>
 			<form onSubmit={handleEditMemory}>
 				<VStack gap={4} alignItems="start">
 					<FormControl>
 						<FormLabel>Foto</FormLabel>
-						<Image
-							src={getPicturePublicUrl(memory.pictureName)}
-							alt={memory.title}
-							width={memory.pictureMeta.width}
-							height={memory.pictureMeta.height}
-						/>
+						<PictureImage memory={memory} />
 						<FormHelperText>
 							La foto no puede ser editada.{' '}
 							<RouteLink
@@ -111,7 +108,13 @@ const EditMemoryPage = () => {
 							defaultValue={memory.description ?? ''}
 						/>
 					</FormControl>
-					<Button type="submit">Editar</Button>
+					<Button
+						type="submit"
+						isLoading={isSubmitting}
+						loadingText="Cargando..."
+					>
+						Editar
+					</Button>
 				</VStack>
 			</form>
 		</>
