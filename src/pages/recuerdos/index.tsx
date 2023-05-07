@@ -22,7 +22,9 @@ const HomePage = () => {
 		<>
 			<Heading variant="main">Mis recuerdos</Heading>
 
-			<MemoriesGrid memories={memories} />
+			<Box mx={{ base: -4, md: 'inherit' }}>
+				<MemoriesGrid memories={memories} />
+			</Box>
 		</>
 	)
 }
