@@ -20,7 +20,7 @@ import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
-import { HiTrash, HiPencil, HiArrowLeft } from 'react-icons/hi'
+import { HiTrash, HiPencil } from 'react-icons/hi'
 import useSWR from 'swr'
 
 import DeleteMemoryAlertDialog from '~/components/DeleteMemoryAlertDialog'
@@ -72,21 +72,10 @@ const DetailsMemoryPage = () => {
 			<NextSeo title={memory.title} />
 			<>
 				<HStack mb={4} spacing={0}>
-					<Heading variant="main">Un recuerdo</Heading>
+					<Heading variant="main">Un recuerdo...</Heading>
 					<Spacer />
 					<Show above="md">
 						<HStack>
-							<RouteLink href="/recuerdos" legacyBehavior passHref>
-								<Button
-									as="a"
-									colorScheme="secondary"
-									leftIcon={<HiArrowLeft />}
-									size="xs"
-									variant="link"
-								>
-									Volver
-								</Button>
-							</RouteLink>
 							<RouteLink
 								href={`/recuerdos/${memory.id}/editar`}
 								legacyBehavior
@@ -113,16 +102,6 @@ const DetailsMemoryPage = () => {
 					</Show>
 					<Show below="sm">
 						<HStack spacing={1}>
-							<RouteLink href="/recuerdos" legacyBehavior passHref>
-								<IconButton
-									as="a"
-									aria-label="Volver"
-									icon={<HiArrowLeft />}
-									colorScheme="secondary"
-									size="sm"
-									variant="link"
-								/>
-							</RouteLink>
 							<RouteLink
 								href={`/recuerdos/${memory.id}/editar`}
 								legacyBehavior
