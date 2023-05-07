@@ -19,8 +19,8 @@ const MemoryGridItem = ({ memory }: MemoryGridItemProps) => {
 					bottom={0}
 					left={0}
 					right={0}
-					px={2}
-					py={1}
+					px={{ base: 1, md: 2 }}
+					py={0.5}
 				>
 					<Text
 						textColor="white"
