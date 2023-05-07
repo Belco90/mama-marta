@@ -13,13 +13,13 @@ import customTheme from '~/custom-theme'
 import { supabase } from '~/lib/supabase-client'
 
 const DEFAULT_SEO: DefaultSeoProps = {
-	titleTemplate: '%s | Mama Marta',
-	defaultTitle: 'Mama Marta',
+	titleTemplate: '%s | Mamá Marta',
+	defaultTitle: 'Mamá Marta',
 	description: 'Para Marta: la mejor mami 🧡',
 	themeColor: customTheme.colors.primary['700'],
 	openGraph: {
 		type: 'website',
-		title: 'Mama Marta',
+		title: 'Mamá Marta',
 	},
 }
 

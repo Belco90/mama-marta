@@ -44,7 +44,7 @@ const NavBar = () => {
 					>
 						<RouteLink href={HOME_URL}>
 							<Text as="span" color="secondary.700">
-								Mama Marta
+								Mamá Marta
 							</Text>
 						</RouteLink>
 					</Box>
