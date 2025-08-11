@@ -14,9 +14,10 @@
 		"postinstall": "pnpm gen:theme-typings"
 	},
 	"engines": {
-		"pnpm": "^8.1.0"
+		"node": ">=22.0.0 <23.0.0",
+		"pnpm": "^9.15.0"
 	},
-	"packageManager": "pnpm@8.3.1",
+	"packageManager": "pnpm@9.15.9",
 	"dependencies": {
 		"@chakra-ui/cli": "^2.4.1",
 		"@chakra-ui/next-js": "^2.1.3",
